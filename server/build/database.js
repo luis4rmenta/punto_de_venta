@@ -14,9 +14,9 @@ const promise_1 = require("mysql2/promise");
 function connect() {
     return __awaiter(this, void 0, void 0, function* () {
         const connection = yield promise_1.createPool({
-            host: 'localhost',
-            user: 'root',
-            password: 'cS!73EKXx22',
+            host: process.env.DB_HOST || 'localhost',
+            user: process.env.DB_USER || 'root',
+            password: process.env.DB_PASSWORD || 'cS!73EKXx22',
             database: 'punto_de_venta',
             connectionLimit: 10
         });
