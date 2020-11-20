@@ -1,0 +1,24 @@
+version: '3'
+services: 
+    express:
+        container_name: Server
+        restart: always
+        image: node:12-alpine
+        command: sh -c "npm install && npm install nodemon -D && npm run dev"
+        ports:
+            - "3000:3000"
+        working_dir: /usr/server
+        volumes: 
+           - ./server:/usr/server
+        links:
+            - mysql
+    mysql:
+        container_name: mysql_database
+        image: mysql:5.7
+        volumes: 
+            - db_punto_de_venta:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_DATABASE: punto_de_venta
+volumes: 
+    db_punto_de_venta:
