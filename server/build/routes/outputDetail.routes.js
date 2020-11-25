@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const outputDetail_controller_1 = require("../controllers/outputDetail.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
 const router = express_1.Router();
 router.route('/')
-    .get(outputDetail_controller_1.getOutputDetails)
-    .post(outputDetail_controller_1.newOutputDetail);
+    .get(auth_middleware_1.verifyToken, outputDetail_controller_1.getOutputDetails)
+    .post(auth_middleware_1.verifyToken, outputDetail_controller_1.newOutputDetail);
 router.route('/:outputDetailId')
-    .get(outputDetail_controller_1.getOutputDetail)
-    .put(outputDetail_controller_1.updateOutputDetail)
-    .delete(outputDetail_controller_1.deleteOutputDetail);
+    .get(auth_middleware_1.verifyToken, outputDetail_controller_1.getOutputDetail)
+    .put(auth_middleware_1.verifyToken, outputDetail_controller_1.updateOutputDetail)
+    .delete(auth_middleware_1.verifyToken, outputDetail_controller_1.deleteOutputDetail);
 exports.default = router;

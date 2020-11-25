@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
+const cors_1 = __importDefault(require("cors"));
 //    ROUTES
 const index_routes_1 = __importDefault(require("./routes/index.routes"));
 const employee_routes_1 = __importDefault(require("./routes/employee.routes"));
@@ -25,9 +26,11 @@ const category_routes_1 = __importDefault(require("./routes/category.routes"));
 const person_routes_1 = __importDefault(require("./routes/person.routes"));
 const output_routes_1 = __importDefault(require("./routes/output.routes"));
 const outputDetail_routes_1 = __importDefault(require("./routes/outputDetail.routes"));
+const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 class App {
     constructor(port) {
         this.port = port;
+        this.cors = cors_1.default();
         this.app = express_1.default();
         this.settings();
         this.middlewares();
@@ -39,6 +42,7 @@ class App {
     middlewares() {
         this.app.use(morgan_1.default('dev'));
         this.app.use(express_1.default.json());
+        this.app.use(cors_1.default());
     }
     routes() {
         this.app.use(index_routes_1.default);
@@ -50,6 +54,7 @@ class App {
         this.app.use('/people', person_routes_1.default);
         this.app.use('/outputs', output_routes_1.default);
         this.app.use('/outputdetails', outputDetail_routes_1.default);
+        this.app.use('/auth', auth_routes_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {

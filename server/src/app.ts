@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 
 //    ROUTES
 import IndexRoutes from './routes/index.routes';
@@ -11,9 +12,11 @@ import CategoryRoutes from './routes/category.routes'
 import PersonRoutes from './routes/person.routes';
 import OutputRoutes from './routes/output.routes';
 import OutputDetailRoutes from './routes/outputDetail.routes';
+import AuthRoutes from './routes/auth.routes';
 
 
 export class App {
+    private cors = cors();
     private app: Application;
 
     constructor(private port?: number | string) {
@@ -30,6 +33,7 @@ export class App {
     middlewares() {
         this.app.use(morgan('dev'));
         this.app.use(express.json());
+        this.app.use(cors());
     }
 
     routes() {
@@ -42,7 +46,7 @@ export class App {
         this.app.use('/people', PersonRoutes);
         this.app.use('/outputs', OutputRoutes);
         this.app.use('/outputdetails', OutputDetailRoutes);
-
+        this.app.use('/auth', AuthRoutes);
     }
 
     async listen() {

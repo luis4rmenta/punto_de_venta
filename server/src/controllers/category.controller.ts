@@ -5,6 +5,8 @@ import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
 import { deleteRow, getRow, getTable, updateRow } from './mysql.controller'
 
+
+
 export async function getCategories(req: Request, res: Response): Promise<Response> {
     const categories: Category[] = await getTable('categoria');
     

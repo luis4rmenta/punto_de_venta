@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import { deleteOutPut, getOutput, getOutputs, newOutput, updateOutput } from '../controllers/output.controller';
+import { verifyToken } from '../middlewares/auth.middleware';
 const router = Router();
 
 router.route('/')
-    .get(getOutputs)
-    .post(newOutput);
+    .get(verifyToken, getOutputs)
+    .post(verifyToken, newOutput);
 
 router.route('/:outputId')
-    .get(getOutput)
-    .post(updateOutput)
-    .delete(deleteOutPut);
+    .get(verifyToken, getOutput)
+    .post(verifyToken, updateOutput)
+    .delete(verifyToken, deleteOutPut);
 
 export default router;

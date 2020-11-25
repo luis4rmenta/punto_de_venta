@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRow = exports.updateRow = exports.getRow = exports.getTable = void 0;
+exports.deleteRow = exports.updateRow = exports.getRows = exports.getRow = exports.getTable = void 0;
 const database_1 = require("../database");
 function getTable(tableName) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -21,10 +21,18 @@ exports.getTable = getTable;
 function getRow(tableName, where, value) {
     return __awaiter(this, void 0, void 0, function* () {
         const conn = yield database_1.connect();
-        return yield conn.query(`SELECT * FROM ${tableName} WHERE ${where} = ${value};`).then((resp) => resp[0]);
+        return yield conn.query(`SELECT * FROM ${tableName} WHERE ${where} =?;`, [value]).then((resp) => resp[0]);
     });
 }
 exports.getRow = getRow;
+function getRows(tableName, where, value) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const conn = yield database_1.connect();
+        console.log(`SELECT * FROM ${tableName} WHERE ${where} = ${value};`);
+        return yield conn.query(`SELECT * FROM ${tableName} WHERE ${where}=?;`, [value]).then((resp) => resp[0]);
+    });
+}
+exports.getRows = getRows;
 function updateRow(tableName, where, whereValue, updatedField) {
     return __awaiter(this, void 0, void 0, function* () {
         const conn = yield database_1.connect();

@@ -9,7 +9,13 @@ export async function getTable(tableName: string): Promise<any[]> {
 
 export async function getRow(tableName:string, where: string, value: string | number) {
     const conn = await connect();
-    return await conn.query(`SELECT * FROM ${tableName} WHERE ${where} = ${value};`).then((resp: any) => resp[0])
+    return await conn.query(`SELECT * FROM ${tableName} WHERE ${where} =?;`,[value]).then((resp: any) => resp[0])
+}
+
+export async function getRows(tableName:string, where: string, value: string | number) {
+    const conn = await connect();
+    console.log(`SELECT * FROM ${tableName} WHERE ${where} = ${value};`);
+    return await conn.query(`SELECT * FROM ${tableName} WHERE ${where}=?;`, [value]).then((resp: any) => resp[0]);
 }
 
 export async function updateRow(tableName: string, where: string, whereValue: string | number, updatedField: any): Promise<MySQLUpdateResponse> {
