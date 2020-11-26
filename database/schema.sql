@@ -172,7 +172,7 @@ CREATE TABLE `empleado` (
   KEY `tipo_empleado_id_idx` (`tipo_empleado_id`),
   CONSTRAINT `persona_id_fk` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`person_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `tipo_empleado_id` FOREIGN KEY (`tipo_empleado_id`) REFERENCES `tipo_empleado` (`tipo_empleado_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +181,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,1,3,'2020-11-10 19:42:38');
+INSERT INTO `empleado` VALUES (1,1,3,'2020-11-10 19:42:38'),(2,4,1,'2020-11-25 19:00:01'),(3,5,2,'2020-11-25 19:00:01');
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +268,7 @@ CREATE TABLE `persona` (
   `genero` varchar(1) NOT NULL,
   `fecha_de_nacimiento` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`person_id`,`curp`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +277,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'SARM770826MZSNMR76','María de Guadalupe','Sanchez','Ramos','Monllao No. 641','525559224303','juagustin20@yopmail.com','M','2000-11-05'),(2,'MECA770826MTLDRR24','Arturo','Cruz','Medina','Avenida Risaralda No. 868, 27055, Veracruz, Mexico','520503222794','impablo12@yopmail.com','M','1975-09-14'),(3,'SOGJ770826MNTTZR54','Jorge Luis','Soto','Guzman','SAN BUENAVENTURA S/N SN, LA VENTA','525559726929','DanDDavis@superrito.com','M','1991-02-01'),(4,'FEPM770826HQTRRR45','Margarita','Fernandez','Perez','Bulevar Ambel No. 395','123456789012','jytijerin24@yopmail.com','F','1986-06-20');
+INSERT INTO `persona` VALUES (1,'SARM770826MZSNMR76','María de Guadalupe','Sanchez','Ramos','Monllao No. 641','525559224303','juagustin20@yopmail.com','M','2000-11-05'),(2,'MECA770826MTLDRR24','Arturo','Cruz','Medina','Avenida Risaralda No. 868, 27055, Veracruz, Mexico','520503222794','impablo12@yopmail.com','M','1975-09-14'),(3,'SOGJ770826MNTTZR54','Jorge Luis','Soto','Guzman','SAN BUENAVENTURA S/N SN, LA VENTA','525559726929','DanDDavis@superrito.com','M','1991-02-01'),(4,'FEPM770826HQTRRR45','Margarita','Fernandez','Perez','Bulevar Ambel No. 395','123456789012','jytijerin24@yopmail.com','F','1986-06-20'),(5,'MOEJ770826MQRRSS','Pedro','pica','piedra','Cuenta de las 100 lagunas','123456789012','foinfanzon14@yopmail.com','M','1961-11-06');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,6 +371,37 @@ INSERT INTO `tipo_empleado` VALUES (1,'administrador'),(2,'moderador'),(3,'cajer
 UNLOCK TABLES;
 
 --
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `usuario_id` int(11) NOT NULL AUTO_INCREMENT,
+  `empleado_id` int(11) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(150) NOT NULL,
+  PRIMARY KEY (`usuario_id`),
+  UNIQUE KEY `usuario_UNIQUE` (`username`),
+  UNIQUE KEY `empleado_id_UNIQUE` (`empleado_id`),
+  KEY `empleado_idx` (`empleado_id`),
+  KEY `usuario_idx` (`username`),
+  CONSTRAINT `fk_usuario-empleado` FOREIGN KEY (`empleado_id`) REFERENCES `empleado` (`empleado_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (11,1,'user1','$2a$10$iNYonhmLO/HS5NPlGP1Gu.tvWSSLWjyk.QR5g8LeDd22N58qtw4s6'),(12,2,'admin','$2a$10$4Qgu9TAtGmKafcy2TaGM8uDVJVnxYjuU2L.7ovlsstFa/ba465Z7a'),(13,3,'moderator','$2a$10$AzskmObAAmY/0bBdqJxyiuPRT5fUfwz89QlwEptBCNWp9RgSD3cli');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `venta`
 --
 
@@ -409,4 +440,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-20 16:14:46
+-- Dump completed on 2020-11-25 19:29:56

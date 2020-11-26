@@ -3,15 +3,17 @@ const router = Router();
 
 import { getEmployees, AddEmployee, getEmployee, deleteEmployee, updateEmployee } from '../controllers/employee.controller';
 import { verifyToken } from '../middlewares/auth.middleware';
+import { isModerator } from '../middlewares/isModerator.middleware';
+import { isAdmin } from '../middlewares/isAdmin.middleware';
 
 
 router.route('/')
-    .get(verifyToken, getEmployees)
-    .post(verifyToken, AddEmployee);
+    .get([verifyToken, isModerator], getEmployees)
+    .post([verifyToken, isAdmin], AddEmployee);
 
 router.route('/:employeeId')
     .get(verifyToken, getEmployee)
-    .delete(verifyToken, deleteEmployee)
-    .put(verifyToken, updateEmployee);
+    .delete([verifyToken, isAdmin], deleteEmployee)
+    .put([verifyToken, isModerator], updateEmployee);
 
 export default router;
