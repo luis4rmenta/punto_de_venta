@@ -50,7 +50,7 @@ function updateCategory(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const categoryUpdated = req.body;
         console.log('update', categoryUpdated);
-        const id = req.body.categoria_id;
+        const id = parseInt(req.params.categoryId);
         console.log('id', id);
         const resp = yield mysql_controller_1.updateRow('categoria', 'categoria_id', id, categoryUpdated).then((resp) => resp[0]);
         if (resp.changedRows) {

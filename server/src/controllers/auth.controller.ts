@@ -122,3 +122,23 @@ export async function login(req: Request, res: Response) {
 
 }
 
+export async function getUserType(req: Request | any, res: Response) {
+    console.log(req.userId);
+    console.log('entry');
+    const conn = await connect();
+    const userType: any = await conn.query(`
+        SELECT empleado.tipo_empleado_id FROM usuario 
+        INNER JOIN empleado 
+            ON usuario.empleado_id = empleado.empleado_id 
+            WHERE usuario.usuario_id = ?;
+    `, [req.userId]).then((resp: any) => resp[0][0]);
+    console.log(userType.tipo_empleado_id);
+    if (userType.tipo_empleado_id) {
+        switch (userType.tipo_empleado_id) {
+            case 1: return res.json({roll: 'admin'});
+            case 2: return res.json({roll: 'moderator'});
+            case 3: return res.json({roll: 'employee'});
+            default: return res.status(401).json({roll: 'error'})
+        }
+    } 
+}

@@ -9,10 +9,10 @@ const router = Router();
 
 router.route('/')
     .get(verifyToken, getCategories)
-    .post([verifyToken, isModerator], newCategory)
-    .put([verifyToken, isModerator], updateCategory);
-
-router.route('/:categoryId')
+    .post([verifyToken, isModerator], newCategory);
+    
+    router.route('/:categoryId')
+    .put([verifyToken, isModerator], updateCategory)
     .get(verifyToken, getCategory)
     .delete([verifyToken, isModerator], deleteCategory);
 

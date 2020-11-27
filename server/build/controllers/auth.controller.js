@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.register = void 0;
+exports.getUserType = exports.login = exports.register = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const mysql_controller_1 = require("./mysql.controller");
 const database_1 = require("../database");
@@ -129,3 +129,26 @@ function login(req, res) {
     });
 }
 exports.login = login;
+function getUserType(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(req.userId);
+        console.log('entry');
+        const conn = yield database_1.connect();
+        const userType = yield conn.query(`
+        SELECT empleado.tipo_empleado_id FROM usuario 
+        INNER JOIN empleado 
+            ON usuario.empleado_id = empleado.empleado_id 
+            WHERE usuario.usuario_id = ?;
+    `, [req.userId]).then((resp) => resp[0][0]);
+        console.log(userType.tipo_empleado_id);
+        if (userType.tipo_empleado_id) {
+            switch (userType.tipo_empleado_id) {
+                case 1: return res.json({ roll: 'admin' });
+                case 2: return res.json({ roll: 'moderator' });
+                case 3: return res.json({ roll: 'employee' });
+                default: return res.status(401).json({ roll: 'error' });
+            }
+        }
+    });
+}
+exports.getUserType = getUserType;

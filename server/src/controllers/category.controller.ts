@@ -39,7 +39,7 @@ export async function newCategory(req: Request, res: Response): Promise<Response
 export async function updateCategory(req: Request, res: Response): Promise<Response> {
     const categoryUpdated = req.body;
     console.log('update', categoryUpdated);
-    const id = req.body.categoria_id;
+    const id = parseInt(req.params.categoryId);
     console.log('id', id);
     const resp: MySQLUpdateResponse = await updateRow('categoria', 'categoria_id', id, categoryUpdated).then((resp: any) => resp[0]);
     if (resp.changedRows) {
