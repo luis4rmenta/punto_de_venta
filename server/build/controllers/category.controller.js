@@ -15,14 +15,17 @@ const mysql_controller_1 = require("./mysql.controller");
 function getCategories(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const categories = yield mysql_controller_1.getTable('categoria');
+        console.log(categories);
         return res.json(categories);
     });
 }
 exports.getCategories = getCategories;
 function getCategory(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log('llego');
         const categoryId = parseInt(req.params.categoryId);
-        const category = yield mysql_controller_1.getRow('categoria', 'categoria_id', categoryId);
+        const category = yield mysql_controller_1.getRow('categoria', 'categoria_id', categoryId).then((resp) => resp[0]);
+        console.log(category);
         return res.json(category);
     });
 }
@@ -48,6 +51,7 @@ function newCategory(req, res) {
 exports.newCategory = newCategory;
 function updateCategory(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log('llego algo');
         const categoryUpdated = req.body;
         console.log('update', categoryUpdated);
         const id = parseInt(req.params.categoryId);

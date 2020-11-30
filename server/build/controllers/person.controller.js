@@ -22,7 +22,7 @@ exports.getPeople = getPeople;
 function getPerson(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const personId = parseInt(req.params.personId);
-        const person = yield mysql_controller_1.getRow('persona', 'person_id', personId);
+        const person = yield mysql_controller_1.getRow('persona', 'person_id', personId).then((resp) => resp[0]);
         return res.json(person);
     });
 }
