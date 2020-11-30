@@ -9,7 +9,7 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active" routerLink="/hub">Menú</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
                     <a class="nav-link" routerLinkActive="active" routerLink="/employees">Empleados</a>
                 </li>
                 <li class="nav-item">
@@ -18,7 +18,7 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLinkActive="active" routerLink="/point_of_sale">Punto de venta</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
                     <a class="nav-link" routerLinkActive="active" routerLink="/categories">Categorias</a>
                 </li>
 
