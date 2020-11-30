@@ -1,5 +1,5 @@
 export interface Person {
-    person_id: number,
+    person_id?: number,
     curp: string,
     nombre: string, 
     primer_apellido: string,
