@@ -10,8 +10,8 @@ import { Person } from '../interfaces/person.interface';
 import jwt from 'jsonwebtoken';
 
 export async function register(req: Request, res: Response) {
-    console.log(req.body);
-    //Obtengo el nuevo empleado enviado
+    try {
+        //Obtengo el nuevo empleado enviado
     const newUser: RegisterForm = {
         empleado_id: req.body.employeeId,
         usuario: req.body.user,
@@ -64,14 +64,16 @@ export async function register(req: Request, res: Response) {
         } else {
             res.json({message: "shomething is wrong!"});
         }
-        console.log(resp);
-        console.log();
+    }
+    } catch (err) {
+        console.error(err);
     }
 
 }
 
 export async function login(req: Request, res: Response) {
-    //Obteniendo información de login
+    try {
+        //Obteniendo información de login
     const login = {
         usuario: req.body.user,
         password: req.body.password
@@ -120,19 +122,22 @@ export async function login(req: Request, res: Response) {
         res.status(401).json({message: 'user not found'});
     }
 
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 export async function getUserType(req: Request | any, res: Response) {
-    console.log(req.userId);
-    console.log('entry');
-    const conn = await connect();
+    try {
+        console.log(`   - usuario id:${req.userId}`);
+        const conn = await connect();
     const userType: any = await conn.query(`
         SELECT empleado.tipo_empleado_id FROM usuario 
         INNER JOIN empleado 
             ON usuario.empleado_id = empleado.empleado_id 
             WHERE usuario.usuario_id = ?;
     `, [req.userId]).then((resp: any) => resp[0][0]);
-    console.log(userType.tipo_empleado_id);
+    console.log(`   - tipo de usuario: ${userType.tipo_empleado_id}`);
     if (userType.tipo_empleado_id) {
         switch (userType.tipo_empleado_id) {
             case 1: return res.json({roll: 'admin'});
@@ -141,4 +146,7 @@ export async function getUserType(req: Request | any, res: Response) {
             default: return res.status(401).json({roll: 'error'})
         }
     } 
+    } catch (err) {
+        console.error(err);
+    }
 }

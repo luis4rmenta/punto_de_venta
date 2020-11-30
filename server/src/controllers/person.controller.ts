@@ -12,7 +12,7 @@ export async function getPeople(req: Request, res: Response): Promise<Response> 
 
 export async function getPerson(req: Request, res: Response): Promise<Response> {
     const personId: number = parseInt(req.params.personId);
-    const person: Person = await getRow('persona', 'person_id', personId);
+    const person: Person = await getRow('persona', 'person_id', personId).then((resp: any) => resp[0]);
     return res.json(person);
 } 
 

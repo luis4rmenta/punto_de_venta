@@ -9,14 +9,15 @@ import { deleteRow, getRow, getTable, updateRow } from './mysql.controller'
 
 export async function getCategories(req: Request, res: Response): Promise<Response> {
     const categories: Category[] = await getTable('categoria');
-    
+    console.log(categories);
     return res.json(categories);
 }
 
 export async function getCategory(req: Request, res: Response): Promise<Response> {
+    console.log('llego');
     const categoryId: number = parseInt(req.params.categoryId)
-    const category: Category = await getRow('categoria', 'categoria_id', categoryId);
-
+    const category: Category = await getRow('categoria', 'categoria_id', categoryId).then((resp: any) => resp[0]);
+    console.log(category);
     return res.json(category);
 }
 
@@ -37,6 +38,7 @@ export async function newCategory(req: Request, res: Response): Promise<Response
 }
 
 export async function updateCategory(req: Request, res: Response): Promise<Response> {
+    console.log('llego algo');
     const categoryUpdated = req.body;
     console.log('update', categoryUpdated);
     const id = parseInt(req.params.categoryId);
