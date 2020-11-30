@@ -1,14 +1,33 @@
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Categoria ID</th>
-            <th scope="col">Nombre</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let category of categories">
-            <th scope="row">{{category.categoria_id}}</th>
-            <th scope="row">{{category.nombre}}</th>
-        </tr>
-    </tbody>
-</table>
+<div class="container">
+    <table class="table text-center mt-3 table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Categoria ID</th>
+                <th scope="col" colspan="">Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories; let i = index">
+                <th scope="row">{{category.categoria_id}}</th>
+                <td scope="row" class="">
+                    <ul class="list-inline">
+                        <li class="list-inline-item col-8">
+                            {{category.nombre}}
+                        </li>
+                        <li class="list-inline-item">
+                            <button class="btn btn-danger" (click)="deleteCategory(category.categoria_id)"><fa-icon [icon]="trashAlt"></fa-icon></button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button class="btn btn-info" (click)="test(category.categoria_id)"><fa-icon [icon]="edit"></fa-icon></button>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-success btn-block" (click)="getNewCategory()">Nuevo</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

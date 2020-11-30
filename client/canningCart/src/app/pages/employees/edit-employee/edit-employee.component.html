@@ -1,0 +1,46 @@
+<div class="row">
+    <div class=" mx-auto">
+        <div class="card p-2">
+            <div class="card-header">
+                <h3 class="text-center">Editar empleado</h3>
+            </div>
+            <div class="card-body">
+                <form (submit)="updateEmployee()">
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="employeeId" class="">ID del empleado</label>
+                            <input type="number" name="employeeId" class="form-control" id="employeeId" [(ngModel)]="newEmployee.empleado_id" disabled>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="personId" class="">ID persona</label>
+                            <input type="number" name="personId" class="form-control" id="personId" [(ngModel)]="newEmployee.persona_id" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="userType">Tipo de usuario</label>
+                            <select name="userType" class="form-control" id="userType" [(ngModel)]="newEmployee.tipo_empleado_id" required>
+                                <option [value]="1">Administrador</option>
+                                <option [value]="2">Moderador</option>
+                                <option [value]="3">Cajero</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="date">Fecha de contratamiento</label>
+                            <input type="date" name="date" class="form-control" id="date" [(ngModel)]="newEmployee.fecha" required>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row ">
+                        <div class="form-group col-md-6">
+                            <button routerLink="/employees" type="button" class="btn btn-danger btn-block"><fa-icon class="mr-2" [icon]="faArrowLeft">Regresar</fa-icon>Regresar</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="submit" class="btn btn-success btn-block"><fa-icon class="mr-2" [icon]="faCheck"></fa-icon>Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

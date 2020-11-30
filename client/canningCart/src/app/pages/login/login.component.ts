@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthResponse } from 'src/app/interfaces/auth-response';
 import { LoginForm } from 'src/app/interfaces/login-form';
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: LoginForm = {
     user: '',
     password: ''
@@ -26,6 +26,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    window.location.reload();
+  }
+
   login() {
     this._authService.login(this.loginForm).subscribe(res => {
       localStorage.setItem('token', res.data.accessData.accessToken);
@@ -35,6 +41,8 @@ export class LoginComponent implements OnInit {
         user: ''
       }
       this._router.navigate(['/hub']);
+      // window.location.reload();
+      // this._router.navigate(['/hub']);
     }, err => {
       console.log(err);
     });

@@ -1,1 +1,31 @@
-<p>employees works!</p>
+<div class="container">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Empleado ID</th>
+                <th scope="col">Persona ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Tipo de empleado</th>
+                <th scope="col">Contratación</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let element of employees; let i = index">
+                <td class="text-justify text-center" scope="">{{element.employeeId}}</td>
+                <td class="text-justify text-center" scope="">{{element.PersonId}}</td>
+                <td class="text-justify text-center" scope="">{{element.employeeName}}</td>
+                <td class="text-justify text-center text-decoration-none" scope="">{{element.employeeType}}</td>
+                <td class="text-justify text-center" scope="">{{element.date}}</td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-info btn-sm" [routerLink]="['/edit', 'employee', element.employeeId]"><fa-icon [icon]="edit"></fa-icon></button>
+                </td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-danger btn-sm" (click)="deleteEmployee(element.employeeId)"><fa-icon [icon]="trashAlt"></fa-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-success btn-block" [routerLink]="['/new','employee']">Nuevo Empleado</button>
+</div>

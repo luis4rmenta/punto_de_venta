@@ -1,0 +1,90 @@
+<!-- <div class="container d-flex justify-content-around"> -->
+<div class="row">
+    <div class="col-8 mx-auto">
+        <div class="card p-2">
+            <div class="card-header">
+                <h3 class="text-center">Registro de empleados</h3>
+            </div>
+            <div class="card-body">
+                <form class="" autocomplete="off" [formGroup]="form" (submit)="createEmployee();">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputNombre">Nombre</label>
+                            <input type="text" class="form-control" formControlName="nombre" [class.is-invalid]="nombre" id="inputNombre" name="name" required>
+                            <small class="text-danger" *ngIf="nombre">El nombre es invalido</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="lastName">Apellido paterno</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="apellido_paterno" [class.is-invalid]="apellido_paterno" name="lastName" required>
+                            <small class="text-danger" *ngIf="apellido_paterno">El apellido paterno es invalido</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="secondSurname">Apellido materno</label>
+                            <input type="text" class="form-control" id="secondSurname" formControlName="apellido_materno" [class.is-invalid]="apellido_materno" name="secondSurname" required>
+                            <small class="text-danger" *ngIf="apellido_materno">El apellido materno es invalido</small>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="curp">CURP</label>
+                            <input type="text" class="form-control" id="curp" name="curp" formControlName="curp" [class.is-invalid]="curp" required>
+                            <small class="text-danger" *ngIf="curp">El curp es invalido, verifica la cantidad de caracteres.</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="numberPhone">Telefono</label>
+                            <input type="text" class="form-control" id="numberPhone" [class.is-invalid]="telefono" formControlName="telefono" name="phone" required>
+                            <small class="text-danger" *ngIf="telefono">Número invalido, ingrese un numero valido entre 10 y 12 caracteres</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" [class.is-invalid]="email" formControlName="email" name="email" required>
+                            <small class="text-danger" *ngIf="email">Correo electronico no valido.</small>
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="gender">Genero</label>
+                            <select class="custom-select" id="gender" name="gender" [class.is-invalid]="genero" formControlName="genero" required>
+                                <option [ngValue]="'F'">F</option>
+                                <option [ngValue]="'M'">M</option>
+                            </select>
+                            <small class="text-danger" *ngIf="genero">Valor invalido</small>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="address">Dirección</label>
+                            <input type="text" class="form-control" id="address" [class.is-invalid]="direccion" formControlName="direccion" name="address" placeholder="1234 Main St" required>
+                            <small class="text-danger" *ngIf="direccion">Dirección invalida.</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="birthdate">Fecha de nacimiento</label>
+                            <input type="date" name="" id="birthdate" name="birthdate" [class.is-invalid]="fecha_de_nacimiento" formControlName="fecha_de_nacimiento" required>
+                            <small class="text-danger" *ngIf="fecha_de_nacimiento">Dirección invalida.</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="userType">Persmisos</label>
+                            <select class="custom-select" id="userType" name="userType" [class.is-invalid]="tipo_empleado_id" formControlName="tipo_empleado_id" required>
+                                <option [ngValue]="1">Administrador</option>
+                                <option [ngValue]="2">Moderador</option>
+                                <option [ngValue]="3">Usuario</option>
+                            </select>
+                            <small class="text-danger" *ngIf="tipo_empleado_id">Dirección invalida.</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-danger btn-block" (click)="comeBack()"><fa-icon class="mr-2" [icon]="faArrowLeft"></fa-icon>Regresar</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="submit" class="btn btn-success btn-block"><fa-icon class="mr-2" [icon]="faSave"></fa-icon>Crear usuario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div> -->
