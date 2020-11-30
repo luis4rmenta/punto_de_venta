@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 export function verifyToken(req: Request | any, res: Response, next: NextFunction) {
     try {
-        console.log(req.headers.authorization);
     
         if (!req.headers.authorization) {
             return res.status(401).send('deauthenticate request');
@@ -15,11 +14,9 @@ export function verifyToken(req: Request | any, res: Response, next: NextFunctio
         }
     
         const payload: any = jwt.verify(token, process.env.SECRETKEY || 'secret')
-        console.log(payload);
         req.userId = payload.id;
         next();
     } catch (error) {
-        console.log(error);
         return res.status(401).send('deauthenticate request');
     }
 }
