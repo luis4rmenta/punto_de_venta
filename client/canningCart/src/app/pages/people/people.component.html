@@ -1,1 +1,26 @@
-<p>people works!</p>
+<div class="container-md mt-4">
+    <div class="card-columns">
+        <div class="card p-1 bg-light border-primary" *ngFor="let person of people; let i = index">
+            <blockquote class="blockquote mb-0 card-body">
+                <hr class="m-1 p-1">
+                <p class="text-center m-0 p0 mb-0 pb-0 clicky" (click)="view(person.person_id)">
+                    <fa-icon [icon]="faIdCard" class="pr-2"></fa-icon>{{person.person_id}}
+                </p>
+                <br>
+                <fa-icon [icon]="faSignature" class="pr-2 pt-0 mt-0"></fa-icon>{{person.nombre}} {{person.primer_apellido}} {{person.segundo_apellido}}
+                <br>
+                <fa-icon [icon]="faPhone" class="pr-2"></fa-icon><span>{{person.telefono}}</span>
+                <p class="text-right p-0 m-0">
+                    <fa-icon [icon]="faEdit" class="text-primary ml-1 mr-1 clicky" [routerLink]="['/edit', 'person', person.person_id]"></fa-icon>
+                    <fa-icon *ngIf="roll == 'admin'" [icon]="faTash" class="text-danger ml-1 mr-1 clicky" (click)="deletePerson(person.person_id)"></fa-icon>
+                </p>
+                <hr class="m-1 p-1">
+            </blockquote>
+        </div>
+        <div class="card p-1 bg-light clicky border-primary p-0" style="height: 200px;" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <button routerLink="/new/person" type="button" class="btn btn-success btn-lg btn-block p-0 m-0" style="width: 100% !important; height: 100% !important;">
+                    <fa-icon [icon]="faPlus" class="pr-2"></fa-icon>Registrar persona
+                </button>
+        </div>
+    </div>
+</div>

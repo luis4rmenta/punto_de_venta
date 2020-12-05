@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand">canningCart</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
                 <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
                     <a class="nav-link" routerLinkActive="active" routerLink="/employees">Empleados</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
                     <a class="nav-link" routerLinkActive="active" routerLink="/people">Personas</a>
                 </li>
                 <li class="nav-item">
@@ -20,6 +20,21 @@
                 </li>
                 <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
                     <a class="nav-link" routerLinkActive="active" routerLink="/categories">Categorias</a>
+                </li>
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/providers">Proveedores</a>
+                </li>
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/inputs">Entradas</a>
+                </li>
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/outputs">Salidas</a>
+                </li>
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/losses">Perdidas</a>
+                </li>
+                <li class="nav-item" *ngIf="roll == 'moderator' || roll == 'admin'">
+                    <a class="nav-link" routerLinkActive="active" routerLink="/products">Productos</a>
                 </li>
 
 

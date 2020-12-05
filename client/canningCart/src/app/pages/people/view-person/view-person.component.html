@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="card mt-2 col-md-8 mx-auto text-white bg-dark">
+            <div class="card-header">
+                <h3 class="text-center">Ver persona</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="https://w7.pngwing.com/pngs/376/98/png-transparent-suit-android-formal-wear-necktie-suit-necktie-desktop-wallpaper-formal-wear-thumbnail.png" alt="asd" class="img-thumbnail">
+                        <h5 class="card-title" style="font-size: 1.5em;">
+                            {{person.nombre}} {{person.primer_apellido}} {{person.segundo_apellido}}
+                            <fa-icon [icon]="faIdCard" class=" ml-4 mr-2"></fa-icon>{{person.person_id }}
+                        </h5>
+                    </div>
+                    <div class="col-md-7">
+                        <div class=" text-justify">
+                            <div class="row text-decoration-none" style="font-size: 1.2em;">
+                                <fa-icon [icon]="faAt" class="mr-2"></fa-icon>{{person.email }}
+                            </div>
+                            <hr>
+                            <div class="row text-decoration-none" style="font-size: 1.2em;">
+                                <fa-icon [icon]="faPhone" class="mr-2"></fa-icon>{{person.telefono }}
+                            </div>
+                            <hr>
+                            <div class="row text-decoration-none" style="font-size: 1.2em;">
+                                <fa-icon [icon]="faGenderless" class="mr-2"></fa-icon>{{person.genero }}
+                            </div>
+                            <hr>
+                            <div class="row text-decoration-none" style="font-size: 1.2em;">
+                                <fa-icon [icon]="faBirthdayCake" class="mr-2 "></fa-icon>{{person.fecha_de_nacimiento.slice(0, 10) }}
+                            </div>
+                            <hr>
+                            <div class="row text-decoration-none" style="font-size: 1.2em;">
+                                <fa-icon [icon]="faMapMarkedAlt" class="mr-2 "></fa-icon>{{person.direccion }}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-danger btn-block" routerLink="/people"><fa-icon [icon]="faArrowLeft" class="mr-2"></fa-icon>Regresar</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary btn-block" [routerLink]="['/edit', 'person', personId]"><fa-icon [icon]="faEdit"></fa-icon>Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

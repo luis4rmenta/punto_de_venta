@@ -19,6 +19,22 @@ import { EditCategoryComponent } from './pages/edit-category/edit-category.compo
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { NewEmployeeComponent } from './pages/employees/new-employee/new-employee.component';
 import { EditEmployeeComponent } from './pages/employees/edit-employee/edit-employee.component';
+import { ProvidersComponent } from './pages/providers/providers.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { InputsComponent } from './pages/inputs/inputs.component';
+import { OutputsComponent } from './pages/outputs/outputs.component';
+import { LossesComponent } from './pages/losses/losses.component';
+import { ViewPersonComponent } from './pages/people/view-person/view-person.component';
+import { EditPersonComponent } from './pages/people/edit-person/edit-person.component';
+import { NewPersonComponent } from './pages/people/new-person/new-person.component';
+import { EditProviderComponent } from './pages/providers/edit-provider/edit-provider.component';
+import { NewProviderComponent } from './pages/providers/new-provider/new-provider.component';
+import { EditProductoComponent } from './pages/products/edit-producto/edit-producto.component';
+import { NewProductoComponent } from './pages/products/new-producto/new-producto.component';
+import { EditInputComponent } from './pages/inputs/edit-input/edit-input.component';
+import { ViewInputComponent } from './pages/inputs/view-input/view-input.component';
+import { EditOutputComponent } from './pages/outputs/edit-output/edit-output.component';
+import { ViewOutputComponent } from './pages/outputs/view-output/view-output.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +49,23 @@ import { EditEmployeeComponent } from './pages/employees/edit-employee/edit-empl
     CategoriesComponent,
     EditCategoryComponent,
     NewEmployeeComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    ProvidersComponent,
+    ProductsComponent,
+    InputsComponent,
+    OutputsComponent,
+    LossesComponent,
+    ViewPersonComponent,
+    EditPersonComponent,
+    NewPersonComponent,
+    EditProviderComponent,
+    NewProviderComponent,
+    EditProductoComponent,
+    NewProductoComponent,
+    EditInputComponent,
+    ViewInputComponent,
+    EditOutputComponent,
+    ViewOutputComponent
   ],
   imports: [
     BrowserModule,

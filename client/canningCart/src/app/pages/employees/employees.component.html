@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -18,14 +18,14 @@
                 <td class="text-justify text-center" scope="">{{element.employeeName}}</td>
                 <td class="text-justify text-center text-decoration-none" scope="">{{element.employeeType}}</td>
                 <td class="text-justify text-center" scope="">{{element.date}}</td>
-                <td class="text-justify text-center">
+                <td class="text-justify text-center" *ngIf="roll == 'admin'">
                     <button class="btn btn-info btn-sm" [routerLink]="['/edit', 'employee', element.employeeId]"><fa-icon [icon]="edit"></fa-icon></button>
                 </td>
-                <td class="text-justify text-center">
+                <td class="text-justify text-center" *ngIf="roll == 'admin'">
                     <button class="btn btn-danger btn-sm" (click)="deleteEmployee(element.employeeId)"><fa-icon [icon]="trashAlt"></fa-icon></button>
                 </td>
             </tr>
         </tbody>
     </table>
-    <button class="btn btn-success btn-block" [routerLink]="['/new','employee']">Nuevo Empleado</button>
+    <button *ngIf="roll == 'admin'" class="btn btn-success btn-block" [routerLink]="['/new','employee']">Nuevo Empleado</button>
 </div>

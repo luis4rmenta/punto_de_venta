@@ -1,0 +1,31 @@
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Organización</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha de contratación</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let element of providers; let i = index">
+                <td class="text-justify text-center" scope="">{{element.proveedor_id}}</td>
+                <td class="text-justify text-center" scope="">{{providersName[i]}}</td>
+                <td class="text-justify text-center" scope="">{{element.organizacion}}</td>
+                <td class="text-justify text-center text-decoration-none" scope="">{{element.estado_id}}</td>
+                <td class="text-justify text-center" scope="">{{element.fecha}}</td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-info btn-sm" [routerLink]="['/edit', 'provider', element.proveedor_id]"><fa-icon [icon]="faEdit"></fa-icon></button>
+                </td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-danger btn-sm" (click)="deleteProvider(element.proveedor_id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button [routerLink]="['/new','provider']" class="btn btn-success btn-block">Nuevo Empleado</button>
+</div>

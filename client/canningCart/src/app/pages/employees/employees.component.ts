@@ -4,6 +4,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { PeopleService } from 'src/app/services/people.service';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-employees',
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 export class EmployeesComponent implements OnInit {
   trashAlt = faTrash;
   edit = faEdit;
+  roll: string;
 
   
   view: boolean;
@@ -26,11 +28,13 @@ export class EmployeesComponent implements OnInit {
 
   constructor(
     private _employeeService: EmployeeService,
-    private _personService: PeopleService
+    private _personService: PeopleService,
+    private authService: AuthService
     ) { }
 
   ngOnInit(): void {
     this.getEmployees();
+    this.authService.getUserType().subscribe(res => this.roll = res.roll, err => console.log);
   }
 
   getEmployees() {
