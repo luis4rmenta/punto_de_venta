@@ -14,31 +14,56 @@ const database_1 = require("../database");
 const mysql_controller_1 = require("./mysql.controller");
 function getProviders(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const providers = yield mysql_controller_1.getTable('proveedor');
-        console.log(providers);
-        return res.json(providers);
+        try {
+            const providers = yield mysql_controller_1.getTable('proveedor');
+            console.log(providers);
+            return res.json(providers);
+        }
+        catch (error) {
+            console.error(error);
+            return res.json({
+                message: 'error'
+            });
+        }
     });
 }
 exports.getProviders = getProviders;
 function getProvider(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const providerId = parseInt(req.params.providerId);
-        const provider = yield mysql_controller_1.getRow('proveedor', 'proveedor_id', providerId.toString());
-        return res.json(provider);
+        try {
+            const providerId = parseInt(req.params.providerId);
+            const provider = yield mysql_controller_1.getRow('proveedor', 'proveedor_id', providerId.toString()).then((resp) => resp[0]);
+            return res.json(provider);
+        }
+        catch (error) {
+            console.error(error);
+            return res.json({
+                message: 'error'
+            });
+        }
     });
 }
 exports.getProvider = getProvider;
 function newProvider(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const conn = yield database_1.connect();
-        const newProvider = req.body;
-        const resp = yield conn.query(`INSERT INTO proveedor (persona_id, organizacion, estado_id, fecha) values (?, ?, ?, ?);`, [newProvider.persona_id, newProvider.organizacion, newProvider.estado_id, newProvider.fecha]).then((resp) => resp[0]);
-        if (resp.affectedRows) {
-            return res.json({
-                message: 'provider added'
-            });
+        try {
+            const conn = yield database_1.connect();
+            const newProvider = req.body;
+            const resp = yield conn.query(`INSERT INTO proveedor (persona_id, organizacion, estado_id, fecha) values (?, ?, ?, ?);`, [newProvider.persona_id, newProvider.organizacion, newProvider.estado_id, newProvider.fecha]).then((resp) => resp[0]);
+            if (resp.affectedRows) {
+                return res.json({
+                    message: 'provider added',
+                    providerId: resp.insertId
+                });
+            }
+            else {
+                return res.json({
+                    message: 'error'
+                });
+            }
         }
-        else {
+        catch (error) {
+            console.error(error);
             return res.json({
                 message: 'error'
             });
@@ -48,23 +73,30 @@ function newProvider(req, res) {
 exports.newProvider = newProvider;
 function updateProvider(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const updatedProvider = req.body;
-        console.log(updatedProvider, '--------------------------');
-        const providerId = req.body.proveedor_id;
-        console.log(providerId);
-        const resp = yield mysql_controller_1.updateRow('proveedor', 'proveedor_id', providerId, updatedProvider);
-        console.log(resp);
-        if (resp.changedRows) {
-            return res.json({
-                message: 'provider updated'
-            });
+        try {
+            const updatedProvider = req.body;
+            const providerId = parseInt(req.params.providerId);
+            const resp = yield mysql_controller_1.updateRow('proveedor', 'proveedor_id', providerId, updatedProvider);
+            console.log(resp);
+            if (resp.changedRows) {
+                return res.json({
+                    message: 'provider updated'
+                });
+            }
+            if (!resp.changedRows && !resp.warningStatus) {
+                return res.json({
+                    message: 'provider updated'
+                });
+            }
+            else {
+                return res.json({
+                    message: 'errror'
+                });
+            }
         }
-        if (!resp.changedRows && !resp.warningStatus) {
-            return res.json({
-                message: 'provider updated'
-            });
-        }
-        else {
+        catch (error) {
+            console.error(error);
+            console.log('Ha ocurrido un error');
             return res.json({
                 message: 'errror'
             });
@@ -74,19 +106,27 @@ function updateProvider(req, res) {
 exports.updateProvider = updateProvider;
 function deleteProvider(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const providerId = req.params.providerId;
-        const resp = yield mysql_controller_1.deleteRow('proveedor', 'proveedor_id', providerId);
-        if (resp.affectedRows) {
-            return res.json({
-                message: 'provider deleted'
-            });
+        try {
+            const providerId = req.params.providerId;
+            const resp = yield mysql_controller_1.deleteRow('proveedor', 'proveedor_id', providerId);
+            if (resp.affectedRows) {
+                return res.json({
+                    message: 'provider deleted'
+                });
+            }
+            if (!resp.affectedRows && !resp.warningStatus) {
+                return res.json({
+                    message: 'provider deleted'
+                });
+            }
+            else {
+                return res.json({
+                    message: 'error'
+                });
+            }
         }
-        if (!resp.affectedRows && !resp.warningStatus) {
-            return res.json({
-                message: 'provider deleted'
-            });
-        }
-        else {
+        catch (error) {
+            console.error(error);
             return res.json({
                 message: 'error'
             });

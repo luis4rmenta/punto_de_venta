@@ -12,5 +12,5 @@ router.route('/')
 router.route('/:employeeId')
     .get(auth_middleware_1.verifyToken, employee_controller_1.getEmployee)
     .delete([auth_middleware_1.verifyToken, isAdmin_middleware_1.isAdmin], employee_controller_1.deleteEmployee)
-    .put([auth_middleware_1.verifyToken, isModerator_middleware_1.isModerator], employee_controller_1.updateEmployee);
+    .put([auth_middleware_1.verifyToken, isAdmin_middleware_1.isAdmin], employee_controller_1.updateEmployee);
 exports.default = router;

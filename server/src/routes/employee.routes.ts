@@ -14,6 +14,6 @@ router.route('/')
 router.route('/:employeeId')
     .get(verifyToken, getEmployee)
     .delete([verifyToken, isAdmin], deleteEmployee)
-    .put([verifyToken, isModerator], updateEmployee);
+    .put([verifyToken, isAdmin], updateEmployee);
 
 export default router;

@@ -9,11 +9,11 @@ import { isModerator } from '../middlewares/isModerator.middleware';
 
 router.route('/')
     .get([verifyToken, isModerator], getProviders)
-    .post([verifyToken, isAdmin], newProvider)
-    .put([verifyToken, isAdmin], updateProvider);
-
-router.route('/:providerId')
+    .post([verifyToken, isAdmin], newProvider);
+    
+    router.route('/:providerId')
     .get(verifyToken, getProvider)
+    .put([verifyToken, isAdmin], updateProvider)
     .delete([verifyToken, isAdmin], deleteProvider);
 
 export default router;
