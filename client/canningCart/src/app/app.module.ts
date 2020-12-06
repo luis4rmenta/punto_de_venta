@@ -35,6 +35,9 @@ import { EditInputComponent } from './pages/inputs/edit-input/edit-input.compone
 import { ViewInputComponent } from './pages/inputs/view-input/view-input.component';
 import { EditOutputComponent } from './pages/outputs/edit-output/edit-output.component';
 import { ViewOutputComponent } from './pages/outputs/view-output/view-output.component';
+import { EditLostComponent } from './pages/losses/edit-lost/edit-lost.component';
+import { ViewLostComponent } from './pages/losses/view-lost/view-lost.component';
+import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +68,10 @@ import { ViewOutputComponent } from './pages/outputs/view-output/view-output.com
     EditInputComponent,
     ViewInputComponent,
     EditOutputComponent,
-    ViewOutputComponent
+    ViewOutputComponent,
+    EditLostComponent,
+    ViewLostComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

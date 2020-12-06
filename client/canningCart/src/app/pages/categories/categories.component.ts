@@ -27,12 +27,11 @@ export class CategoriesComponent implements OnInit {
   getCategories() {
     this._categoryService.getCategories().subscribe((res: Category[]) => {
       this.categories = res;
-    }, err => console.log);
+    }, err => console.error);
   }
 
   deleteCategory(categoryId) {
     this._categoryService.deleteCategory(parseInt(categoryId)).subscribe(res => {
-      console.log(this.categories);
       this.getCategories();
     }, err => false);
   }
@@ -119,7 +118,7 @@ export class CategoriesComponent implements OnInit {
         })
       }
     }, err => {
-      console.log(err);
+      console.error(err);
       Swal.fire({
         title: 'Algo ha salido mal!',
         text: err,

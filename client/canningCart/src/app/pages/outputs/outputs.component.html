@@ -1,1 +1,31 @@
-<p>outputs works!</p>
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Total</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Estado ID</th>
+                <th scope="col">Empleado ID</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let element of outputs; let i = index" class="clicky">
+                <td class="text-justify text-center" scope="">{{element.venta_id}}</td>
+                <td class="text-justify text-center" scope="">{{element.total}}</td>
+                <td class="text-justify text-center" scope="">{{element.fecha}}</td>
+                <td class="text-justify text-center">{{element.estado_id}}</td>
+                <td class="text-justify text-center" scope="">{{employees[i]}}</td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-info btn-sm" [routerLink]="['/edit', 'output', element.venta_id]"><fa-icon [icon]="faEdit"></fa-icon></button>
+                </td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-danger btn-sm" (click)="deleteOutput(element.venta_id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <button [routerLink]="['/new','product']" class="btn btn-success btn-block">Nueva entrada</button> -->
+</div>

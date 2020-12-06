@@ -1,1 +1,35 @@
-<p>products works!</p>
+<div class="container mt-3">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Código de barras</th>
+                <th scope="col">estado ID</th>
+                <th scope="col">costo</th>
+                <th scope="col">precio</th>
+                <th scope="col">Stock</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let element of products; let i = index">
+                <td class="text-justify text-center" scope="">{{element.producto_id}}</td>
+                <td class="text-justify text-center" scope="">{{element.nombre}}</td>
+                <td class="text-justify text-center" scope="">{{element.codigo_de_barras}}</td>
+                <td class="text-justify text-center">{{element.estado_id}}</td>
+                <td class="text-justify text-center" scope="">{{element.costo}}</td>
+                <td class="text-justify text-center" scope="">{{element.precio}}</td>
+                <td class="text-justify text-center" scope="">{{element.stock}}</td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-info btn-sm" [routerLink]="['/edit', 'product', element.producto_id]"><fa-icon [icon]="faEdit"></fa-icon></button>
+                </td>
+                <td class="text-justify text-center">
+                    <button class="btn btn-danger btn-sm" (click)="deleteProducto(element.producto_id)"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button [routerLink]="['/new','product']" class="btn btn-success btn-block">Nuevo producto</button>
+</div>

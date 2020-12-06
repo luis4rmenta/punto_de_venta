@@ -1,1 +1,84 @@
-<p>hub works!</p>
+<div class="container m-3">
+    <div class="row row-cols-1 row-cols-md-3">
+        <div class="col mb-4" *ngIf="roll == 'employee' || roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/point_of_sale">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faCashRegister"></fa-icon>
+                    </h1>
+                    <p class="card-text">Punto de venta</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/products">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faCookieBite"></fa-icon>
+                    </h1>
+                    <p class="card-text">Productos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/categories">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faList"></fa-icon>
+                    </h1>
+                    <p class="card-text">Categorias</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/outputs">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faMoneyBillAlt"></fa-icon>
+                    </h1>
+                    <p class="card-text">Ventas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/inputs">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faShoppingCart"></fa-icon>
+                    </h1>
+                    <p class="card-text">Entradas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/people">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faUsers"></fa-icon>
+                    </h1>
+                    <p class="card-text">Personas</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/providers">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faUserTag"></fa-icon>
+                    </h1>
+                    <p class="card-text">Proveedores</p>
+                </div>
+            </div>
+        </div>
+        <div class="col mb-4" *ngIf="roll == 'moderator' || roll == 'admin'">
+            <div class="card text-white bg-dark mb-3 clicky h-100 mx-auto" routerLink="/employees">
+                <div class="card-body text-center">
+                    <h1 class="card-title">
+                        <fa-icon [icon]="faUserTie"></fa-icon>
+                    </h1>
+                    <p class="card-text">Empleados</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div>
+    <div class="bg-dark text-white border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/hub" *ngIf="roll == 'employee' || roll == 'moderator' || roll == 'admin'">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faBars"></fa-icon>Menú</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/point_of_sale" *ngIf="roll == 'employee' || roll == 'moderator' || roll == 'admin'">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faCashRegister"></fa-icon>Punto de venta</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/products">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faCookieBite"></fa-icon>Productos</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/categories">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faList"></fa-icon>Categorias</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/outputs">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faMoneyBillAlt"></fa-icon>Ventas</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/inputs">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faShoppingCart"></fa-icon>entradas</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/people">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faUsers"></fa-icon>Personas</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/providers">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faUserTag"></fa-icon>Proveedores</div>
+        <div class="sidebar-heading clicky mx-auto border-bottom" routerLink="/employees">
+
+            <fa-icon class="mr-2 ml-2" [icon]="faUserTie"></fa-icon>Empleados</div>
+    </div>
+</div>

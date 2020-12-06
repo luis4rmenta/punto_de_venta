@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { faCashRegister, faCookieBite, faList, faMoneyBillAlt, faShoppingCart, faUsers, faUserTag, faUserTie } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCashRegister, faCookieBite, faList, faMoneyBillAlt, faShoppingCart, faUsers, faUserTag, faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-hub',
-  templateUrl: './hub.component.html',
-  styleUrls: ['./hub.component.css']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
-export class HubComponent implements OnInit {
+export class SidebarComponent implements OnInit {
   faCashRegister = faCashRegister;
   faUsers = faUsers;
   faUserTie = faUserTie;
@@ -16,13 +16,13 @@ export class HubComponent implements OnInit {
   faShoppingCart = faShoppingCart;
   faMoneyBillAlt = faMoneyBillAlt;
   faCookieBite = faCookieBite;
+  faBars = faBars;
 
   roll: string;
-
-  
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService) { 
     this.authService.getUserType().subscribe(res => this.roll = res.roll, err => console.log);
-   }
+
+  }
 
   ngOnInit(): void {
   }

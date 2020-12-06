@@ -34,7 +34,7 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployees();
-    this.authService.getUserType().subscribe(res => this.roll = res.roll, err => console.log);
+    this.authService.getUserType().subscribe(res => this.roll = res.roll, err => console.error);
   }
 
   getEmployees() {
@@ -71,7 +71,7 @@ export class EmployeesComponent implements OnInit {
   deleteEmployee(employeeId: number) {
     this._employeeService.deleteEmployee(employeeId).subscribe(res => {
       this.getEmployees();
-    }, err => console.log);
+    }, err => console.error);
   }
 
 

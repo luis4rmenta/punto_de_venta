@@ -16,14 +16,6 @@ export class EditProviderComponent implements OnInit {
   faCheck = faCheck;
 
   providerId: string | number;
-  oldProvider: Provider;
-  providerUpdated: Provider = {
-    estado_id: 0,
-    fecha: '',
-    organizacion: '',
-    persona_id: 0,
-    proveedor_id: 0
-  }
 
   provider: Provider;
 
@@ -62,10 +54,7 @@ export class EditProviderComponent implements OnInit {
     });
 
     this._providerServices.getProvider(this.providerId).subscribe((res : any) => {
-      console.log(JSON.stringify(res));
-      console.log(JSON.stringify(this.provider));
       if (res == this.provider) {
-        console.log('son iguales');
         Swal.fire({
           title: 'No se han hecho cambios',
           icon: 'info',
@@ -73,9 +62,7 @@ export class EditProviderComponent implements OnInit {
           allowEscapeKey: false
         });
       } else {
-        console.log('entrando al put');
         this._providerServices.putProvider(this.providerId, this.provider).subscribe((res: any ) => {
-          console.log('put ejecutado');
           if (res.message == 'provider updated') {
             Swal.fire({
               title: 'Datos Actualizados',
@@ -85,15 +72,14 @@ export class EditProviderComponent implements OnInit {
             });
           } else {
             Swal.fire({
-              title: '¡Ha ocurrido algo mal! D: 1',
+              title: '¡Ha ocurrido algo mal! D:',
               icon: 'warning',
               allowEscapeKey: false
             });
           }
         }, err => {
-          console.log('error de put');
           Swal.fire({
-            title: '¡Ha ocurrido algo mal! D: 2',
+            title: '¡Ha ocurrido algo mal! D:',
             icon: 'warning',
             allowEscapeKey: false
           });
@@ -102,11 +88,11 @@ export class EditProviderComponent implements OnInit {
       }
     }, err => {
       Swal.fire({
-        title: '¡Ha ocurrido algo mal! D: 3',
+        title: '¡Ha ocurrido algo mal! D:',
         icon: 'warning',
         allowEscapeKey: false
       });
-      console.error(`El error es ${err}`);
+      console.error(err);
     });
     
   }

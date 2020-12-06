@@ -1,0 +1,4 @@
+.clicky :hover {
+    cursor: pointer;
+    color: green;
+}

@@ -1,1 +1,74 @@
-<p>new-producto works!</p>
+<div class="row">
+    <div class="col-8 mx-auto">
+        <div class="card p-2">
+            <div class="card-header">
+                <h3 class="text-center">Registro de productos</h3>
+            </div>
+            <div class="card-body">
+                <form class="" autocomplete="off" [formGroup]="form" (submit)="addProduct()">
+                    <div class="form-row">
+                        <div class="form-group col-md-1">
+                            <label for="productId">ID</label>
+                            <input type="number" class="form-control" placeholder="0" id="productId" name="productId" disabled>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" formControlName="nombre" placeholder="Ositos de goma" [class.is-invalid]="nombre" name="name" required>
+                            <small class="text-danger" *ngIf="nombre">El nombre no es valido</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="codebar">Código de barras</label>
+                            <input type="text" class="form-control" id="codebar" formControlName="codigo_de_barras" placeholder="121510001662" [class.is-invalid]="codigo_de_barras" name="codebar" required>
+                            <small class="text-danger" *ngIf="codigo_de_barras">Código de barras no valido</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="category">Categoria</label>
+                            <select class="custom-select" id="category" name="category" [class.is-invalid]="categoria" formControlName="categoria" [class.is-invalid]="categoria" required>
+                                <option [ngValue]="category.categoria_id" *ngFor="let category of categories">{{category.nombre}}</option>
+                                <!-- <option [ngValue]="2">Inactivo</option>
+                                <option [ngValue]="3">Removido</option> -->
+                            </select>
+                            <small class="text-danger" *ngIf="categoria">La categoria no es valida</small>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="cost">Costo</label>
+                            <input type="number" class="form-control" formControlName="costo" placeholder="0" id="cost" [class.is-invalid]="costo" name="cost" required>
+                            <small class="text-danger" *ngIf="costo">costo invalido</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="price">Precio</label>
+                            <input type="number" class="form-control" formControlName="precio" placeholder="0" id="price" [class.is-invalid]="precio" name="price" required>
+                            <small class="text-danger" *ngIf="precio">precio invalido</small>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="stock">Stock</label>
+                            <input type="number" class="form-control" placeholder="0" formControlName="stock" id="stock" [class.is-invalid]="stock" name="stock" required>
+                            <small class="text-danger" *ngIf="stock">Stock invalido</small>
+
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="state">Estado</label>
+                            <select class="custom-select" id="state" name="state" [class.is-invalid]="estado_id" formControlName="estado_id" [class.is-invalid]="estado_id" required>
+                                <option [ngValue]="1">Activo</option>
+                                <option [ngValue]="2">Inactivo</option>
+                                <option [ngValue]="3">Removido</option>
+                            </select>
+                            <small class="text-danger" *ngIf="estado_id">Estado invalido</small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <button type="button" class="btn btn-danger btn-block" routerLink="/products"><fa-icon class="mr-2" [icon]="faArrowLeft"></fa-icon>Regresar</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button type="submit" class="btn btn-success btn-block"><fa-icon class="mr-2" [icon]="faCheck"></fa-icon>Añadir proveedor</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
