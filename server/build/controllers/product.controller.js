@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findProductByCodebar = exports.deleteProduct = exports.updateProduct = exports.newProduct = exports.getProduct = exports.getProducts = void 0;
+exports.findProductByName = exports.findProductByCodebar = exports.deleteProduct = exports.updateProduct = exports.newProduct = exports.getProduct = exports.getProducts = void 0;
 const database_1 = require("../database");
 function getProducts(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -23,7 +23,7 @@ function getProduct(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const id = req.params.productId;
         const conn = yield database_1.connect();
-        const product = yield conn.query('select * from producto WHERE producto_id = ?', [id]);
+        const product = yield conn.query('select * from producto WHERE producto_id = ?', [id]).then((resp) => resp[0]);
         return res.json(product[0]);
     });
 }
@@ -32,11 +32,11 @@ function newProduct(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const product = req.body;
         const conn = yield database_1.connect();
-        yield conn.query(`insert into producto (
+        const resp = yield conn.query(`insert into producto (
                                 nombre, 
                                 codigo_de_barras,
                                 estado_id, 
-                                fecha_de_creación, 
+                                fecha_de_creacion, 
                                 costo, 
                                 precio, 
                                 stock, 
@@ -51,9 +51,10 @@ function newProduct(req, res) {
             product.precio,
             product.stock,
             product.categoria_id
-        ]);
+        ]).then((resp) => resp[0]);
         return res.json({
-            message: 'Product added'
+            message: 'Product added',
+            productId: resp.insertId
         });
     });
 }
@@ -74,7 +75,7 @@ function deleteProduct(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const id = req.params.productId;
         const conn = yield database_1.connect();
-        yield conn.query('DELETE FROM producto where = ?', [id]);
+        yield conn.query('DELETE FROM producto where producto_id = ?', [id]);
         return res.json({
             message: "Product deleted"
         });
@@ -85,8 +86,18 @@ function findProductByCodebar(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const codebar = req.params.codebar;
         const conn = yield database_1.connect();
-        const product = yield conn.query(`select * from producto where codigo_de_barras = ?`, [codebar]);
-        return res.json(product[0]);
+        const product = yield conn.query(`select * from producto where codigo_de_barras = ?`, [codebar]).then((res) => res[0][0]);
+        return res.json(product);
     });
 }
 exports.findProductByCodebar = findProductByCodebar;
+function findProductByName(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const name = req.params.productName;
+        const conn = yield database_1.connect();
+        const products = yield conn.query(`
+    SELECT * FROM producto WHERE nombre LIKE "%${name}%";`).then();
+        return res.json(products[0]);
+    });
+}
+exports.findProductByName = findProductByName;

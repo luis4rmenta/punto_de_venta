@@ -14,4 +14,6 @@ router.route('/:productId')
     .delete([auth_middleware_1.verifyToken, isModerator_middleware_1.isModerator], product_controller_1.deleteProduct);
 router.route('/codebar/:codebar')
     .get(auth_middleware_1.verifyToken, product_controller_1.findProductByCodebar);
+router.route('/name/:productName')
+    .get(auth_middleware_1.verifyToken, product_controller_1.findProductByName);
 exports.default = router;

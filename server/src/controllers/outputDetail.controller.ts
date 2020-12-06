@@ -13,7 +13,7 @@ export async function getOutputDetails(req: Request, res: Response): Promise<Res
 
 export async function getOutputDetail(req: Request, res: Response): Promise<Response> {
     const outputDetailId: number = parseInt(req.params.inputDetailId);
-    const outputDetail: OutputDetail = await getRow('venta', 'detalle_entrada_id', outputDetailId );
+    const outputDetail: OutputDetail = await getRow('venta', 'detalle_entrada_id', outputDetailId);
     return res.json(outputDetail);
 }
 
@@ -26,12 +26,44 @@ export async function newOutputDetail(req: Request, res: Response): Promise<Resp
             message: 'new output detail created',
             outputDetailId: resp.insertId
         });
-    }   else {
+    } else {
         return res.json({
             message: 'error',
             outPutDetailId: 0
         });
     }
+}
+
+export async function newOutputDetails(req: Request, res: Response): Promise<Response> {
+    const conn = await connect();
+    const newOutputDetails: OutputDetail[] = req.body.outputDetails;
+
+    let outputDetailIds: number[] = [];
+    let well: boolean = false;
+    let resp: any = {};
+    newOutputDetails.forEach(async (newOutputDetail) => {
+        resp = await conn.query(`INSERT INTO detalle_venta (venta_id, costo_unitario, precio_unitario, cantidad, producto_id) values (?, ?, ?, ?, ?);`, [newOutputDetail.venta_id, newOutputDetail.costo_unitario, newOutputDetail.precio_unitario, newOutputDetail.cantidad, newOutputDetail.producto_id]).then((resp: any) => resp[0])
+        // if (resp.affectedRows || resp.insertId) {
+        //     console.log('ewll is true');
+        //     well = true;
+        //     outputDetailIds.push(resp.insertId);
+        // } else {
+        //     console.log('well is false');
+        //     well = false;
+        // }
+    });
+    return res.json({ message: 'success' });
+    // console.log('well es', well);
+    // if (well) {
+    //     return res.json({
+    //         message: 'success',
+    //         outputDetailId: outputDetailIds
+    //     });
+    // } else {
+    //     return res.json({
+    //         message: 'error',
+    //     });
+    // }
 }
 
 export async function updateOutputDetail(req: Request, res: Response): Promise<Response> {

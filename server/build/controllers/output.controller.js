@@ -29,10 +29,19 @@ function getOutput(req, res) {
 exports.getOutput = getOutput;
 function newOutput(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newOutput = req.body;
         const conn = yield database_1.connect();
-        const resp = yield conn.query(`INSERT INTO vemta (total, fecha, estado_id, empleado_id) values (?, ?, ?, ?);`, [newOutput.total, newOutput.fecha, newOutput.estado_id, newOutput.empleado_id]);
-        return res.json(resp);
+        let newOutput = req.body;
+        const user = yield conn.query(`select * from usuario where usuario_id = ?;`, req.userId).then((resp) => resp[0][0]);
+        newOutput.empleado_id = user.empleado_id;
+        const resp = yield conn.query(`
+    INSERT 
+        INTO 
+            venta 
+            (total, fecha, estado_id, empleado_id) 
+                values 
+                (?, ?, ?, ?);`, [newOutput.total, newOutput.fecha,
+            newOutput.estado_id, newOutput.empleado_id]).then((res) => res[0]);
+        return res.json({ message: 'output created', outputId: resp.insertId });
     });
 }
 exports.newOutput = newOutput;

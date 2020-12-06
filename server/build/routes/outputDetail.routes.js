@@ -11,4 +11,6 @@ router.route('/:outputDetailId')
     .get(auth_middleware_1.verifyToken, outputDetail_controller_1.getOutputDetail)
     .put(auth_middleware_1.verifyToken, outputDetail_controller_1.updateOutputDetail)
     .delete(auth_middleware_1.verifyToken, outputDetail_controller_1.deleteOutputDetail);
+router.route('/array')
+    .post(auth_middleware_1.verifyToken, outputDetail_controller_1.newOutputDetails);
 exports.default = router;

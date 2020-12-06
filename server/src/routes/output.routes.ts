@@ -6,10 +6,10 @@ const router = Router();
 
 router.route('/')
     .get([verifyToken, isModerator], getOutputs)
-    .post(verifyToken, newOutput);
+    .post([verifyToken], newOutput);
 
 router.route('/:outputId')
-    .get(verifyToken, getOutput)
+    .get([verifyToken], getOutput)
     .post([verifyToken, isModerator], updateOutput)
     .delete([verifyToken, isModerator], deleteOutPut);
 

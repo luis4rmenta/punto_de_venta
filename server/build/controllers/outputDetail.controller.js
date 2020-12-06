@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOutputDetail = exports.updateOutputDetail = exports.newOutputDetail = exports.getOutputDetail = exports.getOutputDetails = void 0;
+exports.deleteOutputDetail = exports.updateOutputDetail = exports.newOutputDetails = exports.newOutputDetail = exports.getOutputDetail = exports.getOutputDetails = void 0;
 const database_1 = require("../database");
 const mysql_controller_1 = require("./mysql.controller");
 function getOutputDetails(req, res) {
@@ -47,6 +47,39 @@ function newOutputDetail(req, res) {
     });
 }
 exports.newOutputDetail = newOutputDetail;
+function newOutputDetails(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const conn = yield database_1.connect();
+        const newOutputDetails = req.body.outputDetails;
+        let outputDetailIds = [];
+        let well = false;
+        let resp = {};
+        newOutputDetails.forEach((newOutputDetail) => __awaiter(this, void 0, void 0, function* () {
+            resp = yield conn.query(`INSERT INTO detalle_venta (venta_id, costo_unitario, precio_unitario, cantidad, producto_id) values (?, ?, ?, ?, ?);`, [newOutputDetail.venta_id, newOutputDetail.costo_unitario, newOutputDetail.precio_unitario, newOutputDetail.cantidad, newOutputDetail.producto_id]).then((resp) => resp[0]);
+            // if (resp.affectedRows || resp.insertId) {
+            //     console.log('ewll is true');
+            //     well = true;
+            //     outputDetailIds.push(resp.insertId);
+            // } else {
+            //     console.log('well is false');
+            //     well = false;
+            // }
+        }));
+        return res.json({ message: 'success' });
+        // console.log('well es', well);
+        // if (well) {
+        //     return res.json({
+        //         message: 'success',
+        //         outputDetailId: outputDetailIds
+        //     });
+        // } else {
+        //     return res.json({
+        //         message: 'error',
+        //     });
+        // }
+    });
+}
+exports.newOutputDetails = newOutputDetails;
 function updateOutputDetail(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const outputDetailId = parseInt(req.params.outputDetailId);

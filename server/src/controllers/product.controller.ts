@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import { connect } from '../database';
+import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
 import { Product } from '../interfaces/product.interface';
 
 export async function getProducts(req: Request, res: Response): Promise<Response> {
@@ -12,19 +13,19 @@ export async function getProducts(req: Request, res: Response): Promise<Response
 export async function getProduct(req: Request, res: Response): Promise<Response> {
     const id = req.params.productId;
     const conn = await connect();
-    const product = await conn.query('select * from producto WHERE producto_id = ?', [id]);
+    const product = await conn.query('select * from producto WHERE producto_id = ?', [id]).then((resp: any) => resp[0]);
     return res.json(product[0]);
 }
 
 export async function newProduct(req: Request, res: Response): Promise<Response> {
     const product: Product = req.body;
     const conn = await connect();
-    await conn.query(
+    const resp: MySQLInsertResponse = await conn.query(
         `insert into producto (
                                 nombre, 
                                 codigo_de_barras,
                                 estado_id, 
-                                fecha_de_creación, 
+                                fecha_de_creacion, 
                                 costo, 
                                 precio, 
                                 stock, 
@@ -39,9 +40,10 @@ export async function newProduct(req: Request, res: Response): Promise<Response>
             product.precio,
             product.stock,
             product.categoria_id
-        ]);
+        ]).then((resp: any) => resp[0]);
     return res.json({
-        message: 'Product added'
+        message: 'Product added',
+        productId: resp.insertId
     });
 }
 
@@ -58,7 +60,7 @@ export async function updateProduct(req: Request, res: Response): Promise<Respon
 export async function deleteProduct(req: Request, res: Response): Promise<Response> {
     const id = req.params.productId;
     const conn = await connect();
-    await conn.query('DELETE FROM producto where = ?',[id]);
+    await conn.query('DELETE FROM producto where producto_id = ?',[id]);
     return res.json({
         message: "Product deleted"
     });
@@ -67,6 +69,14 @@ export async function deleteProduct(req: Request, res: Response): Promise<Respon
 export async function findProductByCodebar(req: Request, res:Response): Promise<Response> {
     const codebar = req.params.codebar;
     const conn = await connect();
-    const product = await conn.query(`select * from producto where codigo_de_barras = ?`, [codebar]);
-    return res.json(product[0]);
+    const product = await conn.query(`select * from producto where codigo_de_barras = ?`, [codebar]).then((res: any) => res[0][0]);
+    return res.json(product);
+}
+
+export async function findProductByName(req: Request, res: Response): Promise<Response> {
+    const name = req.params.productName;
+    const conn = await connect();
+    const products = await conn.query(`
+    SELECT * FROM producto WHERE nombre LIKE "%${name}%";`,).then();
+    return res.json(products[0]);
 }

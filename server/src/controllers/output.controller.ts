@@ -6,6 +6,9 @@ import { OutputDetail } from '../interfaces/outputDetail.interface';
 import { connect } from '../database';
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
 import { MySQLDeletedResponse } from '../interfaces/mySQLDeletedResponse.interface';
+import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
+import { Person } from '../interfaces/person.interface';
+import { UserI } from '../interfaces/user.interface';
 
 
 export async function getOutputs(req: Request, res: Response): Promise<Response> {
@@ -19,11 +22,22 @@ export async function getOutput(req: Request, res: Response): Promise<Response> 
     return res.json(output);
 }
 
-export async function newOutput(req: Request, res: Response): Promise<Response> {
-    const newOutput: Output = req.body;
+export async function newOutput(req: Request | any, res: Response): Promise<Response> {
     const conn = await connect();
-    const resp = await conn.query(`INSERT INTO vemta (total, fecha, estado_id, empleado_id) values (?, ?, ?, ?);`, [newOutput.total, newOutput.fecha, newOutput.estado_id, newOutput.empleado_id])
-    return res.json(resp);
+    let newOutput: Output = req.body;
+    
+    const user: UserI = await conn.query(`select * from usuario where usuario_id = ?;`, req.userId).then((resp: any) => resp[0][0]);
+    
+    newOutput.empleado_id = user.empleado_id;
+    const resp: MySQLInsertResponse = await conn.query(`
+    INSERT 
+        INTO 
+            venta 
+            (total, fecha, estado_id, empleado_id) 
+                values 
+                (?, ?, ?, ?);`, [newOutput.total, newOutput.fecha, 
+                    newOutput.estado_id, newOutput.empleado_id]).then((res: any) => res[0]);
+    return res.json({message: 'output created', outputId: resp.insertId});
 }
 
 export async function updateOutput(req: Request, res: Response): Promise<Response> {
