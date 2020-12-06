@@ -26,7 +26,7 @@ CREATE TABLE `categoria` (
   `categoria_id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`categoria_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'galletas'),(2,'refrescos'),(3,'enlatado'),(4,'cereales'),(5,'snacks'),(6,'Pienso');
+INSERT INTO `categoria` VALUES (1,'galletas'),(2,'refrescoss'),(3,'enlatado'),(7,'cereales'),(8,'dasdada'),(9,'Dulces'),(10,'Salsas'),(11,'Lacteos'),(12,'Snacks');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +143,7 @@ CREATE TABLE `detalle_venta` (
   KEY `producto_id_fk_venta_idx` (`producto_id`),
   CONSTRAINT `producto_id_fk_venta` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`producto_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `venta_id_fk` FOREIGN KEY (`venta_id`) REFERENCES `venta` (`venta_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,6 +152,7 @@ CREATE TABLE `detalle_venta` (
 
 LOCK TABLES `detalle_venta` WRITE;
 /*!40000 ALTER TABLE `detalle_venta` DISABLE KEYS */;
+INSERT INTO `detalle_venta` VALUES (1,13,18.00,20.00,2,9),(2,14,13.00,15.00,1,3),(3,14,12.00,14.00,1,6),(4,15,8.50,10.00,2,8),(5,16,18.00,20.00,8,9),(6,17,18.00,20.00,1,9),(7,17,8.50,10.00,1,8),(8,18,18.00,20.00,2,9),(9,19,18.00,20.00,6,9),(10,20,8.50,10.00,1,8),(11,20,13.00,15.00,1,3),(12,21,18.00,20.00,1,9),(13,22,18.00,20.00,2,9),(14,23,18.00,20.00,2,9),(15,24,18.00,20.00,2,9),(16,25,18.00,20.00,13,9),(17,25,13.00,15.00,5,3),(18,25,12.00,14.00,1,6),(19,25,11.00,13.00,4,10),(20,25,8.50,10.00,3,8),(21,26,18.00,20.00,9,9);
 /*!40000 ALTER TABLE `detalle_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +173,7 @@ CREATE TABLE `empleado` (
   KEY `tipo_empleado_id_idx` (`tipo_empleado_id`),
   CONSTRAINT `persona_id_fk` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`person_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `tipo_empleado_id` FOREIGN KEY (`tipo_empleado_id`) REFERENCES `tipo_empleado` (`tipo_empleado_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +182,7 @@ CREATE TABLE `empleado` (
 
 LOCK TABLES `empleado` WRITE;
 /*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
-INSERT INTO `empleado` VALUES (1,1,3,'2020-11-10 19:42:38'),(2,4,1,'2020-11-25 19:00:01'),(3,5,2,'2020-11-25 19:00:01');
+INSERT INTO `empleado` VALUES (1,1,3,'2020-11-10 19:42:38'),(2,4,1,'2020-08-25 00:00:00'),(3,5,2,'2020-11-25 19:00:01'),(9,16,2,'2020-11-29 00:00:00'),(10,17,2,'2020-11-29 00:00:00');
 /*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +216,7 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
-INSERT INTO `entrada` VALUES (1,'2020-11-12 16:21:58',0.00,1,1,2),(2,'2020-11-12 16:27:47',0.00,1,1,2),(3,'2020-11-12 16:29:01',0.00,1,1,2),(4,'2020-11-12 16:29:52',0.00,1,1,2),(5,'2020-11-12 16:30:31',0.00,1,1,2),(6,'2020-11-12 16:31:33',0.00,1,1,2),(7,'2020-11-12 16:35:25',0.00,1,1,2),(8,'2020-11-12 16:36:55',0.00,1,1,2),(9,'2020-11-12 16:37:26',0.00,1,1,2),(10,'2020-11-12 16:39:49',0.00,1,1,2),(11,'2020-11-12 16:41:02',0.00,1,1,2),(12,'2020-11-12 16:41:48',0.00,1,1,2),(13,'2020-11-12 16:44:36',0.00,1,1,2),(14,'2020-11-12 16:47:17',0.00,1,1,2),(15,'2020-11-12 16:49:58',0.00,1,1,2),(16,'2020-11-12 16:58:01',0.00,1,1,2),(17,'2020-11-12 16:58:24',0.00,1,1,2),(18,'2020-11-12 17:04:47',0.00,1,1,2),(19,'2020-11-12 17:10:13',0.00,1,1,2),(20,'2020-11-12 17:10:48',0.00,1,1,2),(21,'2020-11-12 17:20:13',0.00,1,1,2),(22,'2020-11-12 17:30:09',0.00,1,1,2),(23,'2020-11-12 17:37:02',245.20,1,1,2),(24,'2020-11-12 19:00:10',245.20,1,1,2),(25,'2020-11-12 19:02:47',245.20,1,1,2),(26,'2020-11-12 19:05:43',245.20,1,1,2),(27,'2020-11-12 19:09:28',245.20,1,1,2),(28,'2020-11-12 19:18:22',245.20,1,1,2),(29,'2020-11-12 19:35:06',245.20,2,1,2),(30,'2020-11-12 19:35:06',245.20,2,1,2),(32,'2020-11-12 19:35:06',245.20,2,1,2),(34,'2020-11-12 19:36:06',245.20,1,1,2);
+INSERT INTO `entrada` VALUES (1,'2020-11-12 16:21:58',0.00,1,1,2),(2,'2020-11-12 16:27:47',0.00,1,1,2),(3,'2020-11-12 16:29:01',0.00,1,1,2),(4,'2020-11-12 16:29:52',0.00,1,1,2),(5,'2020-11-12 16:30:31',0.00,1,1,2),(6,'2020-11-12 16:31:33',0.00,1,1,2),(7,'2020-11-12 16:35:25',0.00,1,1,2),(8,'2020-11-12 16:36:55',0.00,1,1,2),(10,'2020-11-12 16:39:49',0.00,1,1,2),(11,'2020-11-12 16:41:02',0.00,1,1,2),(12,'2020-11-12 16:41:48',0.00,1,1,2),(13,'2020-11-12 16:44:36',0.00,1,1,2),(14,'2020-11-12 16:47:17',0.00,1,1,2),(15,'2020-11-12 16:49:58',0.00,1,1,2),(16,'2020-11-12 16:58:01',0.00,1,1,2),(17,'2020-11-12 16:58:24',0.00,1,1,2),(19,'2020-11-12 17:10:13',0.00,1,1,2),(20,'2020-11-12 17:10:48',0.00,1,1,2),(21,'2020-11-12 17:20:13',0.00,1,1,2),(22,'2020-11-12 17:30:09',0.00,1,1,2),(23,'2020-11-12 17:37:02',245.20,1,1,2),(24,'2020-11-12 19:00:10',245.20,1,1,2),(25,'2020-11-12 19:02:47',245.20,1,1,2),(26,'2020-11-12 19:05:43',245.20,1,1,2),(27,'2020-11-12 19:09:28',245.20,1,1,2),(28,'2020-11-12 19:18:22',245.20,1,1,2),(29,'2020-11-12 19:35:06',245.20,2,1,2),(30,'2020-11-12 19:35:06',245.20,2,1,2),(32,'2020-11-12 19:35:06',245.20,2,1,2),(34,'2020-11-12 19:36:06',245.20,1,1,2);
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +269,7 @@ CREATE TABLE `persona` (
   `genero` varchar(1) NOT NULL,
   `fecha_de_nacimiento` date NOT NULL DEFAULT '0000-00-00',
   PRIMARY KEY (`person_id`,`curp`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -277,7 +278,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (1,'SARM770826MZSNMR76','María de Guadalupe','Sanchez','Ramos','Monllao No. 641','525559224303','juagustin20@yopmail.com','M','2000-11-05'),(2,'MECA770826MTLDRR24','Arturo','Cruz','Medina','Avenida Risaralda No. 868, 27055, Veracruz, Mexico','520503222794','impablo12@yopmail.com','M','1975-09-14'),(3,'SOGJ770826MNTTZR54','Jorge Luis','Soto','Guzman','SAN BUENAVENTURA S/N SN, LA VENTA','525559726929','DanDDavis@superrito.com','M','1991-02-01'),(4,'FEPM770826HQTRRR45','Margarita','Fernandez','Perez','Bulevar Ambel No. 395','123456789012','jytijerin24@yopmail.com','F','1986-06-20'),(5,'MOEJ770826MQRRSS','Pedro','pica','piedra','Cuenta de las 100 lagunas','123456789012','foinfanzon14@yopmail.com','M','1961-11-06');
+INSERT INTO `persona` VALUES (1,'SARM770826MZSNMR76','María de Guadalupe','Sanchez','Ramos','Monllao No. 641','525559224303','juagustin20@yopmail.com','M','2000-11-05'),(2,'MECA770826MTLDRR24','Arturo','Cruz','Medina','Avenida Risaralda No. 868, 27055, Veracruz, Mexico','520503222794','impablo12@yopmail.com','M','1975-09-14'),(3,'SOGJ770826MNTTZR54','Jorge Luis','Soto','Guzman','SAN BUENAVENTURA S/N SN, LA VENTA','525559726929','DanDDavis@superrito.com','M','1991-02-01'),(4,'FEPM770826HQTRRR45','Margarita','Fernandez','Perez','Bulevar Ambel No. 395','123456789012','jytijerin24@yopmail.com','F','1986-06-20'),(5,'MOEJ770826MQRRSS','Pedro','pica','piedra','Cuenta de las 100 lagunas','123456789012','foinfanzon14@yopmail.com','M','1961-11-06'),(6,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(7,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(8,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(9,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(10,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(11,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(12,'123456789012345678','Luis','Perez','Perez','sdasdas adsdadasd asd','123456789012','asdasd@gmail.com','M','2000-11-05'),(13,'sdasdasdasdasdasds','José','Pedro','dasdasda','asdasd asdad adsad','1234567891','dasdasd@gmail.com','M','2000-11-05'),(14,'sdasdasdasdasdasds','sdasdas','dasdasdas','dasdasda','asdasd asdad adsad','1234567891','dasdasd@gmail.com','M','2000-11-05'),(15,'sdasdasdasdasdasds','sdasdas','dasdasdas','dasdasda','asdasd asdad adsad','1234567891','dasdasd@gmail.com','M','2000-11-05'),(16,'sdasdasdasdasdasds','sdasdas','dasdasdas','dasdasda','asdasd asdad adsad','1234567891','dasdasd@gmail.com','M','2000-11-05'),(17,'sdasdasdasdasdssds','dasdasd asd','asda sdas','dadasdas','dadasd adsadsad ','123456789456','asada@gmail.com','M','2000-11-05'),(19,'dasdasdasdasdasdas','sdsadasda asdasd','adasdasdasd','adasdasdas','dasdsadas','12345678912','asdadada@gmail.com','M','1991-04-08'),(20,'asdasdadasdassadas','asdasdad','adadas','dasdasdasda','adasdasdsa','12345678912','asdasddasd@gmail.com','M','1999-11-08');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -293,7 +294,7 @@ CREATE TABLE `producto` (
   `nombre` varchar(45) NOT NULL,
   `codigo_de_barras` varchar(45) NOT NULL,
   `estado_id` int(11) NOT NULL,
-  `fecha_de_creación` datetime DEFAULT NULL,
+  `fecha_de_creacion` datetime DEFAULT NULL,
   `costo` decimal(10,2) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
   `stock` int(11) NOT NULL,
@@ -304,7 +305,7 @@ CREATE TABLE `producto` (
   KEY `categoria_id_fk_idx` (`categoria_id`),
   CONSTRAINT `categoria_id_fk` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`categoria_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `state` FOREIGN KEY (`estado_id`) REFERENCES `cstate` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,7 +314,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,'Kelloggs CORN FLAKES 150g','7501008101049',1,'2020-11-11 08:39:20',19.20,23.00,77,4),(2,'Pringles Extra Hot 40g','038000159596',1,'2020-11-11 08:39:20',18.10,20.00,10,5),(3,'Ciel Mineralizada 600ml','7501055308248',1,'2020-11-11 09:12:50',13.00,15.00,150,2),(4,'Ciel Mineralizada 600ml','7501055308248',1,'2020-11-11 09:12:50',13.00,15.00,20,2);
+INSERT INTO `producto` VALUES (1,'Kelloggs CORN FLAKES 150g','7501008101049',1,'2020-11-11 00:00:00',19.20,23.00,53,7),(2,'Pringles Extra Hot 40g','038000159596',1,'2020-11-11 08:39:20',18.10,20.00,10,NULL),(3,'Ciel Mineralizada 600ml','7501055308248',1,'2020-11-11 09:12:50',13.00,15.00,150,2),(4,'Ciel Mineralizada 600ml','7501055308248',1,'2020-11-11 09:12:50',13.00,15.00,20,2),(6,'Botanera 354ml','738545010481',1,'2020-12-06 00:29:55',12.00,14.00,20,NULL),(7,'LaLa 100 sin lactosa con CACAO','7501020556841',1,'2020-12-06 00:32:30',15.00,16.00,30,NULL),(8,'Runners 68g','7503030199612',1,'2020-12-06 00:38:27',8.50,10.00,50,12),(9,'Pringles Original','038000846731',1,'2020-12-06 00:39:50',18.00,20.00,25,12),(10,'Sabritas Original 42g','7501011101456',1,'2020-12-06 00:41:48',11.00,13.00,50,12);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,9 +332,11 @@ CREATE TABLE `proveedor` (
   `estado_id` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
   PRIMARY KEY (`proveedor_id`),
-  KEY `persona_id_fk_proveedor_idx` (`persona_id`),
-  CONSTRAINT `persona_id_fk_proveedor` FOREIGN KEY (`persona_id`) REFERENCES `proveedor` (`proveedor_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  KEY `persona_id_fk_idx` (`persona_id`),
+  KEY `estado_id_fk_idx` (`estado_id`),
+  CONSTRAINT `fk_proveedor_1` FOREIGN KEY (`persona_id`) REFERENCES `persona` (`person_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_proveedor_2` FOREIGN KEY (`estado_id`) REFERENCES `cstate` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -342,7 +345,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
-INSERT INTO `proveedor` VALUES (2,2,'Ciel',2,'2020-11-11 20:00:05'),(3,3,'Pringles',1,'2020-11-14 07:22:30');
+INSERT INTO `proveedor` VALUES (2,2,'Ciel',2,'2020-11-11 20:00:05'),(3,3,'Pringless',1,'2020-11-14 00:00:00'),(12,19,'Peñafiel',1,'2020-12-04 22:43:39');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -388,7 +391,7 @@ CREATE TABLE `usuario` (
   KEY `empleado_idx` (`empleado_id`),
   KEY `usuario_idx` (`username`),
   CONSTRAINT `fk_usuario-empleado` FOREIGN KEY (`empleado_id`) REFERENCES `empleado` (`empleado_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -397,7 +400,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (11,1,'user1','$2a$10$iNYonhmLO/HS5NPlGP1Gu.tvWSSLWjyk.QR5g8LeDd22N58qtw4s6'),(12,2,'admin','$2a$10$4Qgu9TAtGmKafcy2TaGM8uDVJVnxYjuU2L.7ovlsstFa/ba465Z7a'),(13,3,'moderator','$2a$10$AzskmObAAmY/0bBdqJxyiuPRT5fUfwz89QlwEptBCNWp9RgSD3cli');
+INSERT INTO `usuario` VALUES (12,2,'admin','$2a$10$4Qgu9TAtGmKafcy2TaGM8uDVJVnxYjuU2L.7ovlsstFa/ba465Z7a'),(13,3,'moderator','$2a$10$AzskmObAAmY/0bBdqJxyiuPRT5fUfwz89QlwEptBCNWp9RgSD3cli'),(14,1,'user1','$2a$10$vVVBcVP3QIZVT8d99Kunaexb9RQwg7bjdmvD0CY9aNMd6/cEhMpXq');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -416,10 +419,10 @@ CREATE TABLE `venta` (
   `empleado_id` int(11) NOT NULL,
   PRIMARY KEY (`venta_id`),
   KEY `state_id_fk_idx` (`estado_id`),
-  KEY `empleado_id_fk_idx` (`empleado_id`),
-  CONSTRAINT `empleado_id_fk-vent` FOREIGN KEY (`empleado_id`) REFERENCES `empleado` (`empleado_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  KEY `empleado_id_fk-vent_idx` (`empleado_id`),
+  CONSTRAINT `empleado_id_fk-vent` FOREIGN KEY (`empleado_id`) REFERENCES `empleado` (`empleado_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `state_id_fk-vent` FOREIGN KEY (`estado_id`) REFERENCES `cstate` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -428,6 +431,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (1,100.00,'2020-12-05 20:42:50',1,1),(2,100.00,'2020-12-05 20:42:50',1,1),(3,100.00,'2020-12-05 20:42:50',1,1),(4,100.00,'2020-12-05 20:42:50',1,1),(13,40.00,'2020-12-06 04:56:12',1,2),(14,29.00,'2020-12-06 04:59:46',1,2),(15,20.00,'2020-12-06 05:00:59',1,2),(16,160.00,'2020-12-06 05:02:07',1,2),(17,30.00,'2020-12-06 05:04:20',1,2),(18,40.00,'2020-12-06 05:05:25',1,2),(19,120.00,'2020-12-06 05:06:53',1,2),(20,25.00,'2020-12-06 05:16:24',1,2),(21,20.00,'2020-12-06 05:17:11',1,2),(22,40.00,'2020-12-06 05:17:51',1,2),(23,40.00,'2020-12-06 05:18:22',1,2),(24,40.00,'2020-12-06 05:19:51',1,2),(25,431.00,'2020-12-06 05:23:39',1,2),(26,180.00,'2020-12-06 06:19:52',1,1);
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -440,4 +444,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-25 19:29:56
+-- Dump completed on 2020-12-06  8:06:03
