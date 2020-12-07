@@ -39,8 +39,9 @@ $ npm install
 $ npm run dev
 ```
 notes:
-    - Server default port: 3000;
-    - MySQL default password: secret
+    * Server default port: 3000;
+    * MySQL default password: secret
+    * Los usuarios ya creados se pueden consultar dentro de la DB punto_de_venta en la tabla usuarios; un usuarios administrador es user: admin password: password
     
 # Tech
 La aplicación hace uso de multiples tecnologias y herramientas open source:
