@@ -1,5 +1,7 @@
 # Punto de venta
-Se trata de una sencilla aplicación web que puede manipula la base de datos por medio de CRUDs y es compatible con scanners que generan un espacio entre cada lectura.
+Se trata de una sencilla aplicación web que puede manipular la base de datos por medio de CRUDs y es compatible con scanners que generan un espacio entre cada lectura.
+
+Nota: La aplicación sigue en desarrollo, hace falta agregar pruebas unitarias e integrales, crear la configuración que se utilizará para la producción, organizar métodos usados, solucionar problemas de overfetching y underfetching y arreglar algunos bugs.
 
 
 # Installation
@@ -43,7 +45,7 @@ notes:
     * MySQL default password: secret
     * Los usuarios ya creados se pueden consultar dentro de la DB punto_de_venta en la tabla usuarios; un usuarios administrador es user: admin password: password
     
-# Tech
+# Tecnologías
 La aplicación hace uso de multiples tecnologias y herramientas open source:
 * Angular
 * Node.js
