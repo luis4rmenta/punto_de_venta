@@ -1,6 +1,8 @@
 # Punto de venta
 Se trata de una sencilla aplicación web que puede manipular la base de datos por medio de CRUDs y es compatible con scanners que generan un espacio entre cada lectura.
 
+## Advertencia: Este proyecto puede no contener las mejores practicas ni la mejor implementación. Se deben aceptar los errores y evitar cometerlos en el futuro, este código no es sostenible y requerira mucho tiempo para reformarlo.
+
 Nota: La aplicación sigue en desarrollo, hace falta agregar pruebas unitarias e integrales, crear la configuración que se utilizará para la producción, organizar métodos usados, solucionar problemas de overfetching y underfetching y arreglar algunos bugs.
 
 
