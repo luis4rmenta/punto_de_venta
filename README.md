@@ -1,7 +1,13 @@
 # Punto de venta
 Se trata de una sencilla aplicación web que puede manipular la base de datos por medio de CRUDs y es compatible con scanners que generan un espacio entre cada lectura.
 
-## Advertencia: Este proyecto puede no contener las mejores practicas ni la mejor implementación. Se deben aceptar los errores y evitar cometerlos en el futuro, este código no es sostenible y requerira mucho tiempo para reformarlo.
+#### Advertencia: Este proyecto puede no contener las mejores practicas ni la mejor implementación. Se deben aceptar los errores y evitar cometerlos en el futuro, este código no es sostenible y requerira mucho tiempo para reformarlo.
+# Images
+![alt text](https://raw.githubusercontent.com/beku86/punto_de_venta/main/images/hub.png?raw=true "Hub")
+![alt text](https://raw.githubusercontent.com/beku86/punto_de_venta/main/images/point-of-sale-1.png?raw=true "point-of-sale")
+![alt text](https://raw.githubusercontent.com/beku86/punto_de_venta/main/images/point-of-sale-2.png "point-of-sale 2")
+![alt text](https://raw.githubusercontent.com/beku86/punto_de_venta/main/images/new-product.png "new product")
+![alt text](https://raw.githubusercontent.com/beku86/punto_de_venta/main/images/all-products.png "All products")
 
 Nota: La aplicación sigue en desarrollo, hace falta agregar pruebas unitarias e integrales, crear la configuración que se utilizará para la producción, organizar métodos usados, solucionar problemas de overfetching y underfetching y arreglar algunos bugs.
 
@@ -42,10 +48,10 @@ $ cd client/canningCart
 $ npm install
 $ npm run dev
 ```
-notes:
-    * Server default port: 3000;
-    * MySQL default password: secret
-    * Los usuarios ya creados se pueden consultar dentro de la DB punto_de_venta en la tabla usuarios; un usuarios administrador es user: admin password: password
+# notas:
+- Server default port: 3000;
+- MySQL default password: secret
+- Los usuarios ya creados se pueden consultar dentro de la DB punto_de_venta en la tabla usuarios; un usuarios administrador es user: admin password: password
     
 # Tecnologías
 La aplicación hace uso de multiples tecnologias y herramientas open source:
