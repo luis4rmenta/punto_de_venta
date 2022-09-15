@@ -2,9 +2,9 @@ version: '3'
 services: 
     express:
         container_name: Server
-        restart: always
+        restart: "no"
         image: node:12-alpine
-        command: sh -c "npm install && npm install nodemon -D && npm run dev"
+        command: sh -c "npm install && npm run build && npm run start"
         ports:
             - "3000:3000"
         working_dir: /usr/server
@@ -24,5 +24,15 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: secret
             MYSQL_DATABASE: punto_de_venta
+    client:
+        container_name: application_client
+        restart: "no"
+        image: node:12-alpine
+        working_dir: /usr/client
+        command: sh -c "npm install && npm run build && npm install -g http-server && http-server dist/canningCart/"
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./client/canningCart:/usr/client
 volumes: 
     db_punto_de_venta:

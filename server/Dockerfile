@@ -1,6 +1,10 @@
 FROM node:12-alpine
-WORKDIR /usr/server
+# ENV NODE_ENV "production"
+WORKDIR /app
 COPY . .
-RUN npm install && npm install nodemon
+RUN npm install && npm run build
 EXPOSE 3000
-CMD ["npm", "run" , "dev"]
+
+
+CMD ["npm", "run" , "start"]
+
