@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { RegisterForm } from '../interfaces/registerForm.interface';
 import bcrypt from 'bcryptjs';
 import { getRow, getRows } from './mysql.controller';
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { UserI } from '../interfaces/user.interface';
 import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
 import { Employee } from '../interfaces/employee.interface';
@@ -27,7 +27,7 @@ export async function register(req: Request, res: Response) {
     } if (employeeAccountExists) {
         return res.json({message: 'user account already exists'});
     } else {
-        const conn = await connect();
+        const conn  =  await DataBaseConnection.getInstance().getConnection()
         const resp: MySQLInsertResponse = await conn.query('INSERT INTO usuario (empleado_id, username, password) values (?,?,?);', [newUser.empleado_id, newUser.usuario, newUser.password]).then((resp: any) => resp[0]);
         if (resp.affectedRows && !resp.warningStatus) {
             //Obteniendo información del usuario
@@ -130,7 +130,7 @@ export async function login(req: Request, res: Response) {
 export async function getUserType(req: Request | any, res: Response) {
     try {
         console.log(`   - usuario id:${req.userId}`);
-        const conn = await connect();
+        const conn  =  await DataBaseConnection.getInstance().getConnection()
     const userType: any = await conn.query(`
         SELECT empleado.tipo_empleado_id FROM usuario 
         INNER JOIN empleado 

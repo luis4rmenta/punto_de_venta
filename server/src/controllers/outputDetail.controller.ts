@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { MySQLDeletedResponse } from '../interfaces/mySQLDeletedResponse.interface';
 import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
@@ -19,7 +19,7 @@ export async function getOutputDetail(req: Request, res: Response): Promise<Resp
 
 export async function newOutputDetail(req: Request, res: Response): Promise<Response> {
     const newOutputDetail: OutputDetail = req.body;
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     const resp: MySQLInsertResponse = await conn.query(`INSERT INTO detalle_venta (venta_id, costo_unitario, precio_unitario, cantidad, producto_id) values (?, ?, ?, ?, ?);`, [newOutputDetail.venta_id, newOutputDetail.costo_unitario, newOutputDetail.precio_unitario, newOutputDetail.cantidad, newOutputDetail.producto_id]).then((resp: any) => resp[0])
     if (resp.affectedRows) {
         return res.json({
@@ -35,7 +35,7 @@ export async function newOutputDetail(req: Request, res: Response): Promise<Resp
 }
 
 export async function newOutputDetails(req: Request, res: Response): Promise<Response> {
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     const newOutputDetails: OutputDetail[] = req.body.outputDetails;
 
     let outputDetailIds: number[] = [];

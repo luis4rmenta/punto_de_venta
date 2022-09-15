@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { InputDetail } from '../interfaces/inputDetail.interface';
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { Input } from '../interfaces/input.interface';
 
 import { Product } from '../interfaces/product.interface';
@@ -50,7 +50,7 @@ export async function updateInput(req: Request, res: Response): Promise<Response
 
 export async function newInput(req: Request, res: Response): Promise<Response> {
     try {
-        const conn = await connect();
+        const conn  =  await DataBaseConnection.getInstance().getConnection()
         const newInput: Input = req.body;
         const resp: MySQLInsertResponse = await conn.query(`
         INSERT 

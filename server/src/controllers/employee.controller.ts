@@ -1,19 +1,19 @@
 import { Request, response, Response } from "express";
 
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { Employee } from '../interfaces/employee.interface';
 import { MySQLInsertResponse } from "../interfaces/mySQLInsertResponse.interface";
 
 
 
 export async function getEmployees(req: Request, res: Response): Promise<Response> {
-    const conn  =  await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     const employees = await conn.query(`SELECT empleado_id, persona_id, tipo_empleado_id, DATE_FORMAT(fecha, '%Y-%m-%d') as fecha FROM empleado;`);
     return res.json(employees[0]);
 }
 
 export async function AddEmployee(req: Request, res: Response): Promise<Response> {
-    const conn = await connect();
+  const conn  =  await DataBaseConnection.getInstance().getConnection()
 
     if (req.body.employee) {
     const fecha_de_contrato = req.body.employee.fecha;
@@ -53,7 +53,7 @@ export async function AddEmployee(req: Request, res: Response): Promise<Response
 
 export async function getEmployee(req:Request, res: Response): Promise<Response>{
     const id = req.params.employeeId;
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     const empleados = await conn.query(`
     SELECT 
         empleado_id, persona_id, 
@@ -65,7 +65,7 @@ export async function getEmployee(req:Request, res: Response): Promise<Response>
 
 export async function deleteEmployee(req: Request, res: Response): Promise<Response> {
     const id = req.params.employeeId
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     await conn.query('DELETE FROM empleado where empleado_id = ?', [id]);
     return res.json({
         message: 'Employee deleted'
@@ -80,7 +80,7 @@ export async function updateEmployee(req: Request, res:Response): Promise<Respon
         tipo_empleado_id: string,
         fecha: string 
     } = req.body;
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     await conn.query('UPDATE empleado set ? where empleado_id = ?;',[updateEmployee, id]);
     return res.json({
         message: 'Employee updated'

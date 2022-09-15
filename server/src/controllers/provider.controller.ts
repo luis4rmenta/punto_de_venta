@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { MySQLDeletedResponse } from '../interfaces/mySQLDeletedResponse.interface';
 import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
@@ -37,7 +37,7 @@ export async function getProvider(req: Request, res: Response): Promise<Response
 
 export async function newProvider(req: Request, res: Response): Promise<Response> {
     try {
-        const conn = await connect();
+        const conn  =  await DataBaseConnection.getInstance().getConnection()
         const newProvider: Provider = req.body;
 
         const resp: MySQLInsertResponse = await conn.query(`INSERT INTO proveedor (persona_id, organizacion, estado_id, fecha) values (?, ?, ?, ?);`, [newProvider.persona_id, newProvider.organizacion, newProvider.estado_id, newProvider.fecha]).then((resp: any) => resp[0]);

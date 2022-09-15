@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { Category } from '../interfaces/category.interface';
 import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
@@ -23,7 +23,7 @@ export async function getCategory(req: Request, res: Response): Promise<Response
 
 export async function newCategory(req: Request, res: Response): Promise<Response> {
     const newCategory: Category = req.body;
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     const resp: MySQLInsertResponse = await conn.query(`INSERT INTO categoria (nombre) values (?)`, [newCategory.nombre]).then((resp: any)=>resp[0]);
     if (resp.affectedRows) {
         return res.json({

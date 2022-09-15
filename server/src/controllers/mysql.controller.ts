@@ -1,8 +1,8 @@
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { MySQLDeletedResponse } from '../interfaces/mySQLDeletedResponse.interface';
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
 
-const conn = connect();
+const conn  =  DataBaseConnection.getInstance().getConnection()
 
 
 

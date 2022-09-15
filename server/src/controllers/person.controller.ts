@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { MySQLDeletedResponse } from '../interfaces/mySQLDeletedResponse.interface';
 import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
 import { Person } from '../interfaces/person.interface';
@@ -18,7 +18,7 @@ export async function getPerson(req: Request, res: Response): Promise<Response> 
 
 export async function newPerson(req: Request, res: Response): Promise<Response> {
     const newPerson: Person = req.body;
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     console.log(newPerson.segundo_apellido);
     console.log(JSON.stringify(newPerson));
 

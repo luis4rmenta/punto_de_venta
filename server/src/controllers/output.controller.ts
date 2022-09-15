@@ -3,7 +3,7 @@ import { deleteRow, getRow, getTable, updateRow } from './mysql.controller'
 
 import { Request, Response } from 'express';
 import { OutputDetail } from '../interfaces/outputDetail.interface';
-import { connect } from '../database';
+import { connect, DataBaseConnection } from '../database';
 import { MySQLUpdateResponse } from '../interfaces/mySQLUpdatedResponse.interface';
 import { MySQLDeletedResponse } from '../interfaces/mySQLDeletedResponse.interface';
 import { MySQLInsertResponse } from '../interfaces/mySQLInsertResponse.interface';
@@ -23,7 +23,7 @@ export async function getOutput(req: Request, res: Response): Promise<Response> 
 }
 
 export async function newOutput(req: Request | any, res: Response): Promise<Response> {
-    const conn = await connect();
+    const conn  =  await DataBaseConnection.getInstance().getConnection()
     let newOutput: Output = req.body;
     
     const user: UserI = await conn.query(`select * from usuario where usuario_id = ?;`, req.userId).then((resp: any) => resp[0][0]);
